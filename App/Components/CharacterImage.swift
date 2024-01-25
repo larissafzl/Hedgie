@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CharacterImage: View {
+    @Binding var currentIndex: Int
     var imageName: String
     
     var body: some View {
-        Image(imageName)
+        Image(content[currentIndex].imageName)
             .resizable()
             .scaledToFill()
             .frame(width: 210, height: 195)
