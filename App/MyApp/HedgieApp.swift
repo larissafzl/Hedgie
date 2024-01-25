@@ -8,7 +8,7 @@ import SwiftUI
 struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IntroView_1()
         }
     }
 }
