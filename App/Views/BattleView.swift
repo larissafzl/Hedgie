@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct BattleView: View {
+    @StateObject private var characterDataViewModel = CharacterDataViewModel()
+    
     var body: some View {
         ZStack {
             Background()
             
             TurnBox()
             
-            HedgieBattleView()
+            HedgieBattleImage(viewModel: characterDataViewModel)
             
-            EnemyBattleView(imageName: "otter")
+            EnemyBattleImage(viewModel: characterDataViewModel, imageName: "otter")
             
             Hotbar()
         }
