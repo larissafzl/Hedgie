@@ -5,7 +5,7 @@ import SwiftUI
 struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
-            IntroView1()
+            BattleView()
         }
     }
 }
