@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArrowButtonView: View {
+struct ArrowButton: View {
     var body: some View {
         Image(systemName: "triangleshape.fill")
             .rotationEffect(.degrees(90))
@@ -16,10 +16,7 @@ struct ArrowButtonView: View {
     }
 }
 
-// Contains the logic for the ArrowButton
-struct ArrowButton: View {
-    @Binding var currentIndex: Int
-    
+struct ArrowButtonView: View {
     var body: some View {
         VStack {
             Spacer()
@@ -27,18 +24,27 @@ struct ArrowButton: View {
             HStack {
                 Spacer()
                 
-                // Check if the current index is at the last content item
-                if currentIndex == content.count - 1 {
-                    NavigationLink(destination: IntroView2(currentIndex: $currentIndex)) {
-                        ArrowButtonView()
-                    }
-                } else {
-                    Button(action: {
-                        currentIndex = (currentIndex + 1) % content.count
-                    }) {
-                        ArrowButtonView()
-                    }
-                }
+                ArrowButton()
+            }
+        }
+    }
+}
+
+// Contains the logic for the ArrowButton
+struct ArrowButtonIntroView1: View {
+    @Binding var currentIndex: Int
+    
+    var body: some View {
+        // Check if the current index is at the last content item
+        if currentIndex == content.count - 1 {
+            NavigationLink(destination: IntroView2(currentIndex: $currentIndex)) {
+                ArrowButtonView()
+            }
+        } else {
+            Button(action: {
+                currentIndex = (currentIndex + 1) % content.count
+            }) {
+                ArrowButtonView()
             }
         }
     }

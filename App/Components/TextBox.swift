@@ -39,7 +39,7 @@ struct TextBoxIntroView1: View {
     var body: some View {
         TextBoxView()
             .overlay(
-                ArrowButton(currentIndex: $currentIndex)
+                ArrowButtonIntroView1(currentIndex: $currentIndex)
             )
             .overlay(
                 TextView(currentIndex: $currentIndex, textContent: content[currentIndex].textContent)
@@ -53,7 +53,9 @@ struct TextBoxIntroView2: View {
     var body: some View {
         TextBoxView()
             .overlay(
-                ArrowButton(currentIndex: $currentIndex)
+                NavigationLink(destination: BattleView()) {
+                    ArrowButtonView()
+                }
             )
             .overlay(
                 HStack {

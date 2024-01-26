@@ -20,5 +20,6 @@ struct BattleView: View {
             
             Hotbar()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
