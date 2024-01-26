@@ -57,6 +57,7 @@ struct TextBoxIntroView2: View {
                     ArrowButtonView()
                 }
             )
+        
             .overlay(
                 HStack {
                     Text("Otty:")

@@ -41,11 +41,10 @@ struct ArrowButtonIntroView1: View {
                 ArrowButtonView()
             }
         } else {
-            Button(action: {
-                currentIndex = (currentIndex + 1) % content.count
-            }) {
-                ArrowButtonView()
-            }
+            ArrowButtonView()
+                .onTapGesture {
+                    currentIndex = (currentIndex + 1) % content.count
+                }
         }
     }
 }
