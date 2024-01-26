@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextBox: View {
+struct TextBoxIntroView1: View {
     @Binding var currentIndex: Int
     
     var body: some View {

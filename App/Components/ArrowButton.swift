@@ -11,19 +11,28 @@ struct ArrowButton: View {
     @Binding var currentIndex: Int
     
     var body: some View {
-        VStack() {
+        VStack {
             Spacer()
             HStack {
                 Spacer()
                 
-                Button(action: {
-                    currentIndex = (currentIndex + 1) % content.count
-                }, label: {
-                    Image(systemName: "triangleshape.fill")
-                        .rotationEffect(.degrees(90))
-                        .foregroundColor(Color("orange"))
-                        .padding()
-                })
+                if currentIndex == content.count - 1 {
+                    NavigationLink(destination: IntroView2(currentIndex: $currentIndex)) {
+                        Image(systemName: "triangleshape.fill")
+                            .rotationEffect(.degrees(90))
+                            .foregroundColor(Color("orange"))
+                            .padding()
+                    }
+                } else {
+                    Button(action: {
+                        currentIndex = (currentIndex + 1) % content.count
+                    }) {
+                        Image(systemName: "triangleshape.fill")
+                            .rotationEffect(.degrees(90))
+                            .foregroundColor(Color("orange"))
+                            .padding()
+                    }
+                }
             }
         }
     }

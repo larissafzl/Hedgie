@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-struct CharacterImage: View {
-    var imageName: String
-    
+struct BattleBalloon: View {
     var body: some View {
-        Image(imageName)
+        Image("battleBalloon")
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
             .frame(width: 210, height: 195)
     }
 }
