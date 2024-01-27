@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BattleView: View {
     @StateObject private var characterDataViewModel = CharacterDataViewModel()
+    @StateObject private var skillDataViewModel = SkillDataViewModel()
     
     var body: some View {
         ZStack {
@@ -20,7 +21,7 @@ struct BattleView: View {
             
             EnemyBattleImage(viewModel: characterDataViewModel, imageName: "otter")
             
-            Hotbar()
+            Hotbar(viewModel: skillDataViewModel)
         }
         .navigationBarBackButtonHidden(true)
     }
