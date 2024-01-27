@@ -42,6 +42,11 @@ struct SkillButton: View {
             .foregroundColor(skill.type == .defensive ? Color("blue") : Color("red"))
             .frame(width: 110, height: 110)
             .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
+            )
+            .shadow(color: activeButton == skill ? .black.opacity(0.5) : .clear, radius: 5, x: 0, y: 5)
+            .overlay(
                 SkillButtonText(skill: skill)
             )
             .overlay(
