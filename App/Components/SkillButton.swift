@@ -7,9 +7,36 @@
 
 import SwiftUI
 
-struct SkillButton: View {
+struct Cooldown: View {
     @ObservedObject var skill: SkillData
     
+    var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundColor(Color("yellow"))
+                    .frame(width: 60, height: 40)
+                    .overlay(
+                        HStack {
+                            Text(String(format: "%.0f", skill.cooldown))
+                            Image(systemName: "clock")
+                        }
+                        .font(Font.custom("GillSans", size: 16))
+                    )
+            }
+            .padding(.bottom, 120)
+            
+            Spacer()
+        }
+    }
+}
+
+struct SkillButton: View {
+    @ObservedObject var skill: SkillData
+    @Binding var activeButton: SkillData?
+
     var body: some View {
         RoundedRectangle(cornerRadius: 30)
             .foregroundColor(skill.type == .defensive ? Color("blue") : Color("red"))
@@ -17,6 +44,34 @@ struct SkillButton: View {
             .overlay(
                 SkillButtonText(skill: skill)
             )
+            .overlay(
+                activeButton == skill ? Cooldown(skill: skill) : nil
+            )
+            .onTapGesture {
+                if activeButton == skill {
+                    activeButton = nil
+                } else {
+                    activeButton = skill
+                }
+            }
+    }
+}
+
+struct SkillButtons: View {
+    @ObservedObject var viewModel: SkillDataViewModel
+    @State private var activeButton: SkillData? = nil
+
+    var body: some View {
+        VStack {
+            Spacer()
+
+            HStack(spacing: 5) {
+                SkillButton(skill: viewModel.skillOne, activeButton: $activeButton)
+                SkillButton(skill: viewModel.skillTwo, activeButton: $activeButton)
+                SkillButton(skill: viewModel.skillThree, activeButton: $activeButton)
+                SkillButton(skill: viewModel.skillFour, activeButton: $activeButton)
+            }
+        }
     }
 }
 
@@ -50,24 +105,6 @@ struct SkillButtonText: View {
         }
         .padding(.horizontal, 6)
         .padding(.bottom, 6)
-    }
-}
-
-
-struct SkillButtons: View {
-    @ObservedObject var viewModel: SkillDataViewModel
-    
-    var body: some View {
-        VStack {
-            Spacer()
-            
-            HStack(spacing: 5) {
-                SkillButton(skill: viewModel.skillOne)
-                SkillButton(skill: viewModel.skillTwo)
-                SkillButton(skill: viewModel.skillThree)
-                SkillButton(skill: viewModel.skillFour)
-            }
-        }
     }
 }
 

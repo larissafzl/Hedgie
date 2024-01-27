@@ -12,7 +12,15 @@ enum SkillType {
     case defensive
 }
 
-class SkillData: ObservableObject {
+class SkillData: ObservableObject, Equatable {
+    static func == (lhs: SkillData, rhs: SkillData) -> Bool {
+        return lhs.skillName == rhs.skillName
+            && lhs.description == rhs.description
+            && lhs.type == rhs.type
+            && lhs.strength == rhs.strength
+            && lhs.cooldown == rhs.cooldown
+    }
+
     @Published var skillName: String
     @Published var description: String
     @Published var type: SkillType
