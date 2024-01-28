@@ -115,6 +115,7 @@ struct SkillButtonText: View {
 
 struct ConfirmButton: View {
     @Binding var activeButton: SkillData?
+    @ObservedObject var viewModel: CharacterDataViewModel
 
     var body: some View {
         VStack {
@@ -123,6 +124,22 @@ struct ConfirmButton: View {
             Button(action: {
                 if let activeButton = activeButton {
                     print("Button clicked for \(activeButton.skillName)")
+
+                    if activeButton.type == .offensive {
+                        // Check if adding the skill strength exceeds the total life
+                        if viewModel.otty.currentLife + activeButton.strength <= viewModel.otty.totalLife {
+                            viewModel.otty.currentLife += activeButton.strength
+                        } else {
+                            viewModel.otty.currentLife = viewModel.otty.totalLife
+                        }
+                    } else {
+                        // Check if adding the skill strength exceeds the total life
+                        if viewModel.hedgie.currentLife + activeButton.strength <= viewModel.hedgie.totalLife {
+                            viewModel.hedgie.currentLife += activeButton.strength
+                        } else {
+                            viewModel.hedgie.currentLife = viewModel.hedgie.totalLife
+                        }
+                    }
                 }
             }) {
                 RoundedRectangle(cornerRadius: 30)
@@ -144,15 +161,17 @@ struct ConfirmButton: View {
     }
 }
 
+
 struct Hotbar: View {
-    @ObservedObject var viewModel: SkillDataViewModel
+    @ObservedObject var skillDataViewModel: SkillDataViewModel
+    @ObservedObject var characterDataViewModel: CharacterDataViewModel
     @State private var activeButton: SkillData? = nil
 
     var body: some View {
         HStack(spacing: 5) {
-            SkillButtons(viewModel: viewModel, activeButton: $activeButton)
+            SkillButtons(viewModel: skillDataViewModel, activeButton: $activeButton)
             
-            ConfirmButton(activeButton: $activeButton)
+            ConfirmButton(activeButton: $activeButton, viewModel: characterDataViewModel)
         }
         .padding(.leading, 110)
     }

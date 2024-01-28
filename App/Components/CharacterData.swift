@@ -32,6 +32,6 @@ class CharacterDataViewModel: ObservableObject {
 
     init() {
         self.hedgie = CharacterData(name: "Hedgie", lifeType: .socialEnergy, totalLife: 35, currentLife: 35)
-        self.otty = CharacterData(name: "Otty", lifeType: .qualityTime, totalLife: 50, currentLife: 50)
+        self.otty = CharacterData(name: "Otty", lifeType: .qualityTime, totalLife: 50, currentLife: 0)
     }
 }

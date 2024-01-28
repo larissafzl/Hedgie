@@ -21,7 +21,7 @@ struct BattleView: View {
             
             EnemyBattleImage(viewModel: characterDataViewModel, imageName: "otter")
             
-            Hotbar(viewModel: skillDataViewModel)
+            Hotbar(skillDataViewModel: skillDataViewModel, characterDataViewModel: characterDataViewModel)
         }
         .navigationBarBackButtonHidden(true)
     }
