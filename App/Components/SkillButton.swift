@@ -119,19 +119,27 @@ struct ConfirmButton: View {
     var body: some View {
         VStack {
             Spacer()
-            
-            RoundedRectangle(cornerRadius: 30)
-                .foregroundColor(Color("orange"))
-                .frame(width: 110, height: 40)
-                .overlay(
-                    Text("Confirm")
-                        .font(Font.custom("GillSans", size: 20))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .foregroundColor(activeButton == nil ? .black.opacity(0.5) : .clear)
-                        .frame(width: 110, height: 40)
-                )
+
+            Button(action: {
+                if let activeButton = activeButton {
+                    print("Button clicked for \(activeButton.skillName)")
+                }
+            }) {
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundColor(Color("orange"))
+                    .frame(width: 110, height: 40)
+                    .overlay(
+                        Text("Confirm")
+                            .font(Font.custom("GillSans", size: 20))
+                            .foregroundColor(.black)
+                    )
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundColor(activeButton == nil ? Color.black.opacity(0.5) : Color.clear)
+                    .frame(width: 110, height: 40)
+            )
+            .disabled(activeButton == nil)
         }
     }
 }
