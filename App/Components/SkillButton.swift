@@ -140,6 +140,9 @@ struct ConfirmButton: View {
                             viewModel.hedgie.currentLife = viewModel.hedgie.totalLife
                         }
                     }
+
+                    // Deselect the activeButton after confirming
+                    self.activeButton = nil
                 }
             }) {
                 RoundedRectangle(cornerRadius: 30)
@@ -160,7 +163,6 @@ struct ConfirmButton: View {
         }
     }
 }
-
 
 struct Hotbar: View {
     @ObservedObject var skillDataViewModel: SkillDataViewModel
