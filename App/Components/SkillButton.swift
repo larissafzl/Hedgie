@@ -64,7 +64,7 @@ struct SkillButton: View {
 
 struct SkillButtons: View {
     @ObservedObject var viewModel: SkillDataViewModel
-    @State private var activeButton: SkillData? = nil
+    @Binding var activeButton: SkillData?
 
     var body: some View {
         VStack {
@@ -114,6 +114,8 @@ struct SkillButtonText: View {
 }
 
 struct ConfirmButton: View {
+    @Binding var activeButton: SkillData?
+
     var body: some View {
         VStack {
             Spacer()
@@ -121,18 +123,28 @@ struct ConfirmButton: View {
             RoundedRectangle(cornerRadius: 30)
                 .foregroundColor(Color("orange"))
                 .frame(width: 110, height: 40)
+                .overlay(
+                    Text("Confirm")
+                        .font(Font.custom("GillSans", size: 20))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .foregroundColor(activeButton == nil ? .black.opacity(0.5) : .clear)
+                        .frame(width: 110, height: 40)
+                )
         }
     }
 }
 
 struct Hotbar: View {
     @ObservedObject var viewModel: SkillDataViewModel
-    
+    @State private var activeButton: SkillData? = nil
+
     var body: some View {
         HStack(spacing: 5) {
-            SkillButtons(viewModel: viewModel)
+            SkillButtons(viewModel: viewModel, activeButton: $activeButton)
             
-            ConfirmButton()
+            ConfirmButton(activeButton: $activeButton)
         }
         .padding(.leading, 110)
     }
