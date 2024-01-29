@@ -33,9 +33,29 @@ struct Cooldown: View {
     }
 }
 
+struct SkillLoading: View {
+    @ObservedObject var skill: SkillData
+    @ObservedObject var viewModel: SkillDataViewModel
+
+    var body: some View {
+        print("\(skill.skillName) Remaining Cooldown: \(skill.remainingCooldown)")
+
+        return viewModel.confirmedSkills[skill] == true && skill.remainingCooldown > 0 ?
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundColor(Color.black.opacity(0.5))
+                .overlay(
+                    Text(String(format: "%.0f", skill.remainingCooldown))
+                        .font(Font.custom("GillSans", size: 90))
+                        .foregroundColor(.white)
+                )
+            : nil
+    }
+}
+
 struct SkillButton: View {
     @ObservedObject var skill: SkillData
     @Binding var activeButton: SkillData?
+    @ObservedObject var viewModel: SkillDataViewModel
 
     var body: some View {
         RoundedRectangle(cornerRadius: 30)
@@ -50,6 +70,9 @@ struct SkillButton: View {
                 SkillButtonText(skill: skill)
             )
             .overlay(
+                SkillLoading(skill: skill, viewModel: viewModel)
+            )
+            .overlay(
                 activeButton == skill ? Cooldown(skill: skill) : nil
             )
             .onTapGesture {
@@ -59,6 +82,7 @@ struct SkillButton: View {
                     activeButton = skill
                 }
             }
+            .disabled(viewModel.confirmedSkills[skill] == true)
     }
 }
 
@@ -71,10 +95,10 @@ struct SkillButtons: View {
             Spacer()
 
             HStack(spacing: 5) {
-                SkillButton(skill: viewModel.skillOne, activeButton: $activeButton)
-                SkillButton(skill: viewModel.skillTwo, activeButton: $activeButton)
-                SkillButton(skill: viewModel.skillThree, activeButton: $activeButton)
-                SkillButton(skill: viewModel.skillFour, activeButton: $activeButton)
+                SkillButton(skill: viewModel.skillOne, activeButton: $activeButton, viewModel: viewModel)
+                SkillButton(skill: viewModel.skillTwo, activeButton: $activeButton, viewModel: viewModel)
+                SkillButton(skill: viewModel.skillThree, activeButton: $activeButton, viewModel: viewModel)
+                SkillButton(skill: viewModel.skillFour, activeButton: $activeButton, viewModel: viewModel)
             }
         }
     }
@@ -115,7 +139,18 @@ struct SkillButtonText: View {
 
 struct ConfirmButton: View {
     @Binding var activeButton: SkillData?
-    @ObservedObject var viewModel: CharacterDataViewModel
+    @ObservedObject var characterDataViewModel: CharacterDataViewModel
+    @ObservedObject var skillDataViewModel: SkillDataViewModel
+    
+    // Function to print confirmed skills
+    func printConfirmedSkills() {
+        print("Confirmed Skills:")
+        for (skill, confirmed) in skillDataViewModel.confirmedSkills {
+            if confirmed {
+                print(skill.skillName)
+            }
+        }
+    }
 
     var body: some View {
         VStack {
@@ -125,24 +160,33 @@ struct ConfirmButton: View {
                 if let activeButton = activeButton {
                     print("Button clicked for \(activeButton.skillName)")
 
+                    // Handle confirmation logic here
+                    skillDataViewModel.confirmedSkills[activeButton] = true
+
                     if activeButton.type == .offensive {
                         // Check if adding the skill strength exceeds the total life
-                        if viewModel.otty.currentLife + activeButton.strength <= viewModel.otty.totalLife {
-                            viewModel.otty.currentLife += activeButton.strength
+                        if characterDataViewModel.otty.currentLife + activeButton.strength <= characterDataViewModel.otty.totalLife {
+                            characterDataViewModel.otty.currentLife += activeButton.strength
                         } else {
-                            viewModel.otty.currentLife = viewModel.otty.totalLife
+                            characterDataViewModel.otty.currentLife = characterDataViewModel.otty.totalLife
                         }
                     } else {
                         // Check if adding the skill strength exceeds the total life
-                        if viewModel.hedgie.currentLife + activeButton.strength <= viewModel.hedgie.totalLife {
-                            viewModel.hedgie.currentLife += activeButton.strength
+                        if characterDataViewModel.hedgie.currentLife + activeButton.strength <= characterDataViewModel.hedgie.totalLife {
+                            characterDataViewModel.hedgie.currentLife += activeButton.strength
                         } else {
-                            viewModel.hedgie.currentLife = viewModel.hedgie.totalLife
+                            characterDataViewModel.hedgie.currentLife = characterDataViewModel.hedgie.totalLife
                         }
                     }
 
                     // Deselect the activeButton after confirming
                     self.activeButton = nil
+                    
+                    // Decrease the remaining cooldowns for all skills
+                    skillDataViewModel.decreaseCooldowns()
+                    
+                    // Print confirmed skills
+                    printConfirmedSkills()
                 }
             }) {
                 RoundedRectangle(cornerRadius: 30)
@@ -157,7 +201,6 @@ struct ConfirmButton: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 30)
                     .foregroundColor(activeButton == nil ? Color.black.opacity(0.5) : Color.clear)
-                    .frame(width: 110, height: 40)
             )
             .disabled(activeButton == nil)
         }
@@ -168,12 +211,12 @@ struct Hotbar: View {
     @ObservedObject var skillDataViewModel: SkillDataViewModel
     @ObservedObject var characterDataViewModel: CharacterDataViewModel
     @State private var activeButton: SkillData? = nil
-
+    
     var body: some View {
         HStack(spacing: 5) {
             SkillButtons(viewModel: skillDataViewModel, activeButton: $activeButton)
             
-            ConfirmButton(activeButton: $activeButton, viewModel: characterDataViewModel)
+            ConfirmButton(activeButton: $activeButton, characterDataViewModel: characterDataViewModel, skillDataViewModel: skillDataViewModel)
         }
         .padding(.leading, 110)
     }
