@@ -14,22 +14,25 @@ struct Cooldown: View {
         VStack {
             HStack {
                 Spacer()
-                
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(Color("yellow"))
-                    .frame(width: 60, height: 40)
-                    .overlay(
-                        HStack {
-                            Text(String(format: "%.0f", skill.cooldown))
-                            Image(systemName: "clock")
-                        }
-                        .font(Font.custom("GillSans", size: 16))
-                    )
+                cooldownOverlay
             }
             .padding(.bottom, 120)
             
             Spacer()
         }
+    }
+
+    private var cooldownOverlay: some View {
+        RoundedRectangle(cornerRadius: 30)
+            .foregroundColor(Color("yellow"))
+            .frame(width: 60, height: 40)
+            .overlay(
+                HStack {
+                    Text(String(format: "%.0f", skill.cooldown))
+                    Image(systemName: "clock")
+                }
+                .font(Font.custom("GillSans", size: 16))
+            )
     }
 }
 
@@ -38,17 +41,19 @@ struct SkillLoading: View {
     @ObservedObject var viewModel: SkillDataViewModel
 
     var body: some View {
-        print("\(skill.skillName) Remaining Cooldown: \(skill.remainingCooldown)")
+        if viewModel.confirmedSkills[skill] == true && skill.remainingCooldown > 0 {
+            loadingOverlay
+        }
+    }
 
-        return viewModel.confirmedSkills[skill] == true && skill.remainingCooldown > 0 ?
-            RoundedRectangle(cornerRadius: 30)
-                .foregroundColor(Color.black.opacity(0.5))
-                .overlay(
-                    Text(String(format: "%.0f", skill.remainingCooldown))
-                        .font(Font.custom("GillSans", size: 90))
-                        .foregroundColor(.white)
-                )
-            : nil
+    private var loadingOverlay: some View {
+        RoundedRectangle(cornerRadius: 30)
+            .foregroundColor(Color.black.opacity(0.5))
+            .overlay(
+                Text(String(format: "%.0f", skill.remainingCooldown))
+                    .font(Font.custom("GillSans", size: 90))
+                    .foregroundColor(.white)
+            )
     }
 }
 
@@ -58,31 +63,27 @@ struct SkillButton: View {
     @ObservedObject var viewModel: SkillDataViewModel
 
     var body: some View {
+        buttonContent
+            .onTapGesture {
+                activeButton = (activeButton == skill) ? nil : skill
+            }
+            .disabled(viewModel.confirmedSkills[skill] == true)
+    }
+
+    private var buttonContent: some View {
         RoundedRectangle(cornerRadius: 30)
             .foregroundColor(skill.type == .defensive ? Color("blue") : Color("red"))
             .frame(width: 110, height: 110)
-            .overlay(
-                RoundedRectangle(cornerRadius: 30)
-                    .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
-            )
+            .overlay(buttonOverlay)
+    }
+
+    private var buttonOverlay: some View {
+        RoundedRectangle(cornerRadius: 30)
+            .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
             .shadow(color: activeButton == skill ? .black.opacity(0.5) : .clear, radius: 5, x: 0, y: 5)
-            .overlay(
-                SkillButtonText(skill: skill)
-            )
-            .overlay(
-                SkillLoading(skill: skill, viewModel: viewModel)
-            )
-            .overlay(
-                activeButton == skill ? Cooldown(skill: skill) : nil
-            )
-            .onTapGesture {
-                if activeButton == skill {
-                    activeButton = nil
-                } else {
-                    activeButton = skill
-                }
-            }
-            .disabled(viewModel.confirmedSkills[skill] == true)
+            .overlay(SkillButtonText(skill: skill))
+            .overlay(SkillLoading(skill: skill, viewModel: viewModel))
+            .overlay(activeButton == skill ? Cooldown(skill: skill) : nil)
     }
 }
 
@@ -109,31 +110,33 @@ struct SkillButtonText: View {
     
     var body: some View {
         VStack {
-            VStack {
-                Text("\(skill.skillName)")
-                    .font(Font.custom("GillSans", size: 20)).italic()
-                    .frame(height: 50)
-                    .multilineTextAlignment(.center)
+            Text("\(skill.skillName)")
+                .font(Font.custom("GillSans", size: 20)).italic()
+                .frame(height: 50)
+                .multilineTextAlignment(.center)
 
-                Divider()
-                    .frame(width: 100)
-                    .background(.black)
-                    .padding(.top, -8)
-            }
+            Divider()
+                .frame(width: 100)
+                .background(.black)
+                .padding(.top, -8)
             
-            HStack {
-                Text(skill.strength == 0 ? "" : String(format: "+%.0f", skill.strength))
-                    .font(Font.custom("GillSans", size: 14))
-                    .multilineTextAlignment(.center)
-                
-                Text("\(skill.description)")
-                    .font(Font.custom("GillSans", size: 14))
-                    .multilineTextAlignment(.center)
-            }
-            .padding(.top, -11)
+            skillDescription
         }
         .padding(.horizontal, 6)
         .padding(.bottom, 6)
+    }
+
+    private var skillDescription: some View {
+        HStack {
+            Text(skill.strength == 0 ? "" : String(format: "+%.0f", skill.strength))
+                .font(Font.custom("GillSans", size: 14))
+                .multilineTextAlignment(.center)
+            
+            Text("\(skill.description)")
+                .font(Font.custom("GillSans", size: 14))
+                .multilineTextAlignment(.center)
+        }
+        .padding(.top, -11)
     }
 }
 
@@ -142,67 +145,63 @@ struct ConfirmButton: View {
     @ObservedObject var characterDataViewModel: CharacterDataViewModel
     @ObservedObject var skillDataViewModel: SkillDataViewModel
     
-    // Function to print confirmed skills
-    func printConfirmedSkills() {
-        print("Confirmed Skills:")
-        for (skill, confirmed) in skillDataViewModel.confirmedSkills {
-            if confirmed {
-                print(skill.skillName)
-            }
-        }
-    }
-
     var body: some View {
         VStack {
             Spacer()
+            confirmButton
+        }
+    }
 
-            Button(action: {
-                if let activeButton = activeButton {
-                    print("Button clicked for \(activeButton.skillName)")
+    private var confirmButton: some View {
+        Button(action: {
+            handleConfirmation()
+        }) {
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundColor(Color("orange"))
+                .frame(width: 110, height: 40)
+                .overlay(
+                    Text("Confirm")
+                        .font(Font.custom("GillSans", size: 20))
+                        .foregroundColor(.black)
+                )
+        }
+        .overlay(
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundColor(activeButton == nil ? Color.black.opacity(0.5) : Color.clear)
+        )
+        .disabled(activeButton == nil)
+    }
 
-                    // Handle confirmation logic here
-                    skillDataViewModel.confirmedSkills[activeButton] = true
+    private func handleConfirmation() {
+        if let activeButton = activeButton {
+            print("Button clicked for \(activeButton.skillName)")
 
-                    if activeButton.type == .offensive {
-                        // Check if adding the skill strength exceeds the total life
-                        if characterDataViewModel.otty.currentLife + activeButton.strength <= characterDataViewModel.otty.totalLife {
-                            characterDataViewModel.otty.currentLife += activeButton.strength
-                        } else {
-                            characterDataViewModel.otty.currentLife = characterDataViewModel.otty.totalLife
-                        }
-                    } else {
-                        // Check if adding the skill strength exceeds the total life
-                        if characterDataViewModel.hedgie.currentLife + activeButton.strength <= characterDataViewModel.hedgie.totalLife {
-                            characterDataViewModel.hedgie.currentLife += activeButton.strength
-                        } else {
-                            characterDataViewModel.hedgie.currentLife = characterDataViewModel.hedgie.totalLife
-                        }
-                    }
+            skillDataViewModel.confirmedSkills[activeButton] = true
 
-                    // Deselect the activeButton after confirming
-                    self.activeButton = nil
-                    
-                    // Decrease the remaining cooldowns for all skills
-                    skillDataViewModel.decreaseCooldowns()
-                    
-                    // Print confirmed skills
-                    printConfirmedSkills()
-                }
-            }) {
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(Color("orange"))
-                    .frame(width: 110, height: 40)
-                    .overlay(
-                        Text("Confirm")
-                            .font(Font.custom("GillSans", size: 20))
-                            .foregroundColor(.black)
-                    )
+            if activeButton.type == .offensive {
+                updateCharacterLife(characterDataViewModel.otty)
+            } else {
+                updateCharacterLife(characterDataViewModel.hedgie)
             }
-            .overlay(
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(activeButton == nil ? Color.black.opacity(0.5) : Color.clear)
-            )
-            .disabled(activeButton == nil)
+
+            self.activeButton = nil
+            skillDataViewModel.decreaseCooldowns()
+            printConfirmedSkills()
+        }
+    }
+
+    private func updateCharacterLife(_ character: CharacterData) {
+        if character.currentLife + activeButton!.strength <= character.totalLife {
+            character.currentLife += activeButton!.strength
+        } else {
+            character.currentLife = character.totalLife
+        }
+    }
+
+    private func printConfirmedSkills() {
+        print("Confirmed Skills:")
+        for (skill, confirmed) in skillDataViewModel.confirmedSkills where confirmed {
+            print(skill.skillName)
         }
     }
 }
@@ -215,7 +214,6 @@ struct Hotbar: View {
     var body: some View {
         HStack(spacing: 5) {
             SkillButtons(viewModel: skillDataViewModel, activeButton: $activeButton)
-            
             ConfirmButton(activeButton: $activeButton, characterDataViewModel: characterDataViewModel, skillDataViewModel: skillDataViewModel)
         }
         .padding(.leading, 110)
