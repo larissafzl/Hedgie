@@ -77,3 +77,62 @@ struct TextBoxIntroView2: View {
             )
     }
 }
+
+struct TextBoxBattleHedgie: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            TextBoxView()
+                .padding(.vertical, 24)
+                .overlay(
+                    HStack {
+                        Text("Hedgie")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        Text("used")
+                            .font(Font.custom("GillSans", size: 20))
+                        
+                        Text("SkillName")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        Text("and made")
+                            .font(Font.custom("GillSans", size: 20))
+                        
+                        Text("Otty")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        Text("happy!")
+                            .font(Font.custom("GillSans", size: 20))
+                    }
+                )
+        }
+    }
+}
+
+struct TextBoxBattleEnemy: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            TextBoxView()
+                .padding(.vertical, 24)
+                .overlay(
+                    HStack {
+                        Text("Otty")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        Text("used")
+                            .font(Font.custom("GillSans", size: 20))
+                        
+                        Text("SkillName")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        Text("and tired")
+                            .font(Font.custom("GillSans", size: 20))
+                        
+                        Text("Hedgie!")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                    }
+                )
+        }
+    }
+}

@@ -44,13 +44,14 @@ struct GetCharacterImage: View {
 
 struct HedgieBattleImage: View {
     @ObservedObject var viewModel: CharacterDataViewModel
+    var imageName: String
     
     var body: some View {
         VStack {
             Spacer()
             
             HStack {
-                CharacterImageSmall(imageName: "hedge")
+                CharacterImageSmall(imageName: imageName)
                     .padding(.vertical, 50)
                     .padding(.horizontal, -20)
                     .overlay(

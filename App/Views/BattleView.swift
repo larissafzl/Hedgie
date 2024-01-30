@@ -15,9 +15,9 @@ struct BattleView: View {
         ZStack {
             Background()
             
-            TurnBox()
+            TurnBoxHedgie()
             
-            HedgieBattleImage(viewModel: characterDataViewModel)
+            HedgieBattleImage(viewModel: characterDataViewModel, imageName: "hedge")
             
             EnemyBattleImage(viewModel: characterDataViewModel, imageName: "otter")
             
