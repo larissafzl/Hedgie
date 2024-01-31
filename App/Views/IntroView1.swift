@@ -15,19 +15,17 @@ struct IntroView1: View {
     }
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                Background()
+        ZStack {
+            Background()
+            
+            VStack(spacing: 32) {
+                Spacer()
                 
-                VStack(spacing: 32) {
-                    Spacer()
-                    
-                    GetCharacterImage(currentIndex: $currentIndex, imageName: content[currentIndex].imageName)
-                    
-                    TextBoxIntroView1(currentIndex: $currentIndex)
-                    
-                    Spacer()
-                }
+                GetCharacterImage(currentIndex: $currentIndex, imageName: content[currentIndex].imageName)
+                
+                TextBoxIntroView1(currentIndex: $currentIndex)
+                
+                Spacer()
             }
         }
     }
