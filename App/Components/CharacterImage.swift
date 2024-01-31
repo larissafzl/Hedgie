@@ -43,7 +43,7 @@ struct GetCharacterImage: View {
 }
 
 struct HedgieBattleImage: View {
-    @ObservedObject var viewModel: CharacterDataViewModel
+    @ObservedObject var characterDataViewModel: CharacterDataViewModel
     var imageName: String
     
     var body: some View {
@@ -55,7 +55,7 @@ struct HedgieBattleImage: View {
                     .padding(.vertical, 50)
                     .padding(.horizontal, -20)
                     .overlay(
-                        StatsBalloonLeft(viewModel: viewModel, character: viewModel.hedgie)
+                        StatsBalloonLeft(characterDataViewModel: characterDataViewModel, character: characterDataViewModel.hedgie)
                     )
                 
                 Spacer()
@@ -65,7 +65,7 @@ struct HedgieBattleImage: View {
 }
 
 struct EnemyBattleImage: View {
-    @ObservedObject var viewModel: CharacterDataViewModel
+    @ObservedObject var characterDataViewModel: CharacterDataViewModel
     var imageName: String
     
     var body: some View {
@@ -77,7 +77,7 @@ struct EnemyBattleImage: View {
                     .padding(.vertical, 50)
                     .padding(.horizontal, -20)
                     .overlay(
-                        StatsBalloonRight(viewModel: viewModel, character: viewModel.otty)
+                        StatsBalloonRight(characterDataViewModel: characterDataViewModel, character: characterDataViewModel.otty)
                     )
             }
             

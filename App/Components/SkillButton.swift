@@ -38,10 +38,10 @@ struct Cooldown: View {
 
 struct SkillLoading: View {
     @ObservedObject var skill: SkillData
-    @ObservedObject var viewModel: SkillDataViewModel
+    @ObservedObject var skillDataViewModel: SkillDataViewModel
 
     var body: some View {
-        if viewModel.confirmedSkills[skill] == true && skill.remainingCooldown > 0 {
+        if skillDataViewModel.confirmedSkills[skill] == true && skill.remainingCooldown > 0 {
             loadingOverlay
         }
     }
@@ -60,14 +60,14 @@ struct SkillLoading: View {
 struct SkillButton: View {
     @ObservedObject var skill: SkillData
     @Binding var activeButton: SkillData?
-    @ObservedObject var viewModel: SkillDataViewModel
+    @ObservedObject var skillDataViewModel: SkillDataViewModel
 
     var body: some View {
         buttonContent
             .onTapGesture {
                 activeButton = (activeButton == skill) ? nil : skill
             }
-            .disabled(viewModel.confirmedSkills[skill] == true)
+            .disabled(skillDataViewModel.confirmedSkills[skill] == true)
     }
 
     private var buttonContent: some View {
@@ -82,13 +82,13 @@ struct SkillButton: View {
             .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
             .shadow(color: activeButton == skill ? .black.opacity(0.5) : .clear, radius: 5, x: 0, y: 5)
             .overlay(SkillButtonText(skill: skill))
-            .overlay(SkillLoading(skill: skill, viewModel: viewModel))
+            .overlay(SkillLoading(skill: skill, skillDataViewModel: skillDataViewModel))
             .overlay(activeButton == skill ? Cooldown(skill: skill) : nil)
     }
 }
 
 struct SkillButtons: View {
-    @ObservedObject var viewModel: SkillDataViewModel
+    @ObservedObject var skillDataViewModel: SkillDataViewModel
     @Binding var activeButton: SkillData?
 
     var body: some View {
@@ -96,10 +96,10 @@ struct SkillButtons: View {
             Spacer()
 
             HStack(spacing: 5) {
-                SkillButton(skill: viewModel.skillOne, activeButton: $activeButton, viewModel: viewModel)
-                SkillButton(skill: viewModel.skillTwo, activeButton: $activeButton, viewModel: viewModel)
-                SkillButton(skill: viewModel.skillThree, activeButton: $activeButton, viewModel: viewModel)
-                SkillButton(skill: viewModel.skillFour, activeButton: $activeButton, viewModel: viewModel)
+                SkillButton(skill: skillDataViewModel.skillOne, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
+                SkillButton(skill: skillDataViewModel.skillTwo, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
+                SkillButton(skill: skillDataViewModel.skillThree, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
+                SkillButton(skill: skillDataViewModel.skillFour, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
             }
         }
     }
@@ -213,7 +213,7 @@ struct Hotbar: View {
     
     var body: some View {
         HStack(spacing: 5) {
-            SkillButtons(viewModel: skillDataViewModel, activeButton: $activeButton)
+            SkillButtons(skillDataViewModel: skillDataViewModel, activeButton: $activeButton)
             ConfirmButton(activeButton: $activeButton, characterDataViewModel: characterDataViewModel, skillDataViewModel: skillDataViewModel)
         }
         .padding(.leading, 110)

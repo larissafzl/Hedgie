@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StatsBalloonLeft: View {
-    @ObservedObject var viewModel: CharacterDataViewModel
+    @ObservedObject var characterDataViewModel: CharacterDataViewModel
     @ObservedObject var character: CharacterData
     
     var body: some View {
@@ -19,13 +19,13 @@ struct StatsBalloonLeft: View {
             .padding(.leading, 300)
             .padding(.bottom, 200)
             .overlay(
-                HedgieStatsView(character: viewModel.hedgie)
+                HedgieStatsView(character: characterDataViewModel.hedgie)
             )
     }
 }
 
 struct StatsBalloonRight: View {
-    @ObservedObject var viewModel: CharacterDataViewModel
+    @ObservedObject var characterDataViewModel: CharacterDataViewModel
     @ObservedObject var character: CharacterData
     
     var body: some View {
@@ -36,7 +36,7 @@ struct StatsBalloonRight: View {
             .padding(.trailing, 300)
             .padding(.bottom, 150)
             .overlay(
-                EnemyStatsView(character: viewModel.otty)
+                EnemyStatsView(character: characterDataViewModel.otty)
             )
     }
 }

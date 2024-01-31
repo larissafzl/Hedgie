@@ -17,9 +17,9 @@ struct BattleView: View {
             
             TurnBoxHedgie()
             
-            HedgieBattleImage(viewModel: characterDataViewModel, imageName: "hedge")
+            HedgieBattleImage(characterDataViewModel: characterDataViewModel, imageName: "hedge")
             
-            EnemyBattleImage(viewModel: characterDataViewModel, imageName: "otter")
+            EnemyBattleImage(characterDataViewModel: characterDataViewModel, imageName: "otter")
             
             Hotbar(skillDataViewModel: skillDataViewModel, characterDataViewModel: characterDataViewModel)
         }
