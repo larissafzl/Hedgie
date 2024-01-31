@@ -9,7 +9,7 @@ struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                IntroView1()
+                BattleView()
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)

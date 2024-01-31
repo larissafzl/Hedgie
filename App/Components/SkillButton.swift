@@ -75,15 +75,15 @@ struct SkillButton: View {
             .foregroundColor(skill.type == .defensive ? Color("blue") : Color("red"))
             .frame(width: 110, height: 110)
             .overlay(buttonOverlay)
+            .shadow(color: activeButton == skill ? .black.opacity(0.5) : .clear, radius: 5, x: 0, y: 5)
+            .overlay(SkillButtonText(skill: skill))
+            .overlay(SkillLoading(skill: skill))
+            .overlay(activeButton == skill ? Cooldown(skill: skill) : nil)
     }
 
     private var buttonOverlay: some View {
         RoundedRectangle(cornerRadius: 30)
             .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
-            .shadow(color: activeButton == skill ? .black.opacity(0.5) : .clear, radius: 5, x: 0, y: 5)
-            .overlay(SkillButtonText(skill: skill))
-            .overlay(SkillLoading(skill: skill))
-            .overlay(activeButton == skill ? Cooldown(skill: skill) : nil)
     }
 }
 
@@ -151,11 +151,11 @@ struct ConfirmButton: View {
             confirmButton
         }
     }
-
+    
     private var confirmButton: some View {
-        Button(action: {
-            handleConfirmation()
-        }) {
+        NavigationLink {
+            BattleHedgie(activeButton: $activeButton)
+        } label: {
             RoundedRectangle(cornerRadius: 30)
                 .foregroundColor(Color("orange"))
                 .frame(width: 110, height: 40)
@@ -170,39 +170,6 @@ struct ConfirmButton: View {
                 .foregroundColor(activeButton == nil ? Color.black.opacity(0.5) : Color.clear)
         )
         .disabled(activeButton == nil)
-    }
-
-    private func handleConfirmation() {
-        if let activeButton = activeButton {
-            print("Button clicked for \(activeButton.skillName)")
-
-            skillDataViewModel.confirmedSkills[activeButton] = true
-
-            if activeButton.type == .offensive {
-                updateCharacterLife(characterDataViewModel.otty)
-            } else {
-                updateCharacterLife(characterDataViewModel.hedgie)
-            }
-
-            self.activeButton = nil
-            skillDataViewModel.decreaseCooldowns()
-            printConfirmedSkills()
-        }
-    }
-
-    private func updateCharacterLife(_ character: CharacterData) {
-        if character.currentLife + activeButton!.strength <= character.totalLife {
-            character.currentLife += activeButton!.strength
-        } else {
-            character.currentLife = character.totalLife
-        }
-    }
-
-    private func printConfirmedSkills() {
-        print("Confirmed Skills:")
-        for (skill, confirmed) in skillDataViewModel.confirmedSkills where confirmed {
-            print(skill.skillName)
-        }
     }
 }
 

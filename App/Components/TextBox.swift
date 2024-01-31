@@ -79,6 +79,8 @@ struct TextBoxIntroView2: View {
 }
 
 struct TextBoxBattleHedgie: View {
+    @Binding var activeButton: SkillData?
+    
     var body: some View {
         VStack {
             Spacer()
@@ -92,7 +94,7 @@ struct TextBoxBattleHedgie: View {
                         Text("used")
                             .font(Font.custom("GillSans", size: 20))
                         
-                        Text("SkillName")
+                        Text("\(activeButton?.skillName ?? "No Skill Selected")")
                             .font(Font.custom("GillSans", size: 20)).italic()
                         
                         Text("and made")
