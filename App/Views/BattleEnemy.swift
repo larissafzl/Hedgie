@@ -10,8 +10,9 @@ import SwiftUI
 struct BattleEnemy: View {
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
     @EnvironmentObject var skillDataViewModel: SkillDataViewModel
-    @State private var goToNextView = false
     @State private var randomSkill: SkillData?
+    @State private var goToNextView = false
+    @State private var goToDefeatView = false
 
     var body: some View {
         ZStack {
@@ -31,8 +32,14 @@ struct BattleEnemy: View {
             let skillsArray = [ottySkills.skillOne, ottySkills.skillTwo, ottySkills.skillThree, ottySkills.skillFour]
             self.randomSkill = skillsArray.randomElement()
 
-            if let skill = randomSkill {
-                self.updateCharacterLife(for: characterDataViewModel.hedgie, with: skill.strength)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if let skill = randomSkill {
+                    self.updateCharacterLife(for: characterDataViewModel.hedgie, with: skill.strength)
+                }
+                
+                if characterDataViewModel.hedgie.currentLife == 0 {
+                    goToDefeatView = true
+                }
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -40,10 +47,19 @@ struct BattleEnemy: View {
             }
         }
         .background(
-            NavigationLink(destination: BattleView(), isActive: $goToNextView) {
-                EmptyView()
+            Group {
+                if goToDefeatView {
+                    NavigationLink(destination: DefeatView(), isActive: $goToDefeatView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                } else {
+                    NavigationLink(destination: BattleView(), isActive: $goToNextView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                }
             }
-            .hidden()
         )
     }
 

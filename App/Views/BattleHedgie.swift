@@ -13,6 +13,7 @@ struct BattleHedgie: View {
     @Binding var activeButton: SkillData?
     @State private var copiedActiveButton: SkillData?
     @State private var goToNextView = false
+    @State private var goToVictoryView = false
     
     var body: some View {
         ZStack {
@@ -36,15 +37,28 @@ struct BattleHedgie: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 handleConfirmation()
+                
+                if characterDataViewModel.otty.currentLife == characterDataViewModel.otty.totalLife {
+                    goToVictoryView = true
+                }
             }
             
             copiedActiveButton = activeButton
         }
         .background(
-            NavigationLink(destination: BattleEnemy(), isActive: $goToNextView) {
-                EmptyView()
+            Group {
+                if goToVictoryView {
+                    NavigationLink(destination: VictoryView(), isActive: $goToVictoryView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                } else {
+                    NavigationLink(destination: BattleEnemy(), isActive: $goToNextView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                }
             }
-            .hidden()
         )
     }
     
@@ -81,36 +95,3 @@ struct BattleHedgie: View {
         }
     }
 }
-
-//    private func handleConfirmation() {
-//        if let activeButton = activeButton {
-//            print("Button clicked for \(activeButton.skillName)")
-//
-//            skillDataViewModel.confirmedSkills[activeButton] = true
-//
-//            if activeButton.type == .offensive {
-//                updateCharacterLife(characterDataViewModel.otty)
-//            } else {
-//                updateCharacterLife(characterDataViewModel.hedgie)
-//            }
-//
-//            self.activeButton = nil
-//            skillDataViewModel.decreaseCooldowns()
-//            printConfirmedSkills()
-//        }
-//    }
-//
-//    private func updateCharacterLife(_ character: CharacterData) {
-//        if character.currentLife + activeButton!.strength <= character.totalLife {
-//            character.currentLife += activeButton!.strength
-//        } else {
-//            character.currentLife = character.totalLife
-//        }
-//    }
-//
-//    private func printConfirmedSkills() {
-//        print("Confirmed Skills:")
-//        for (skill, confirmed) in skillDataViewModel.confirmedSkills where confirmed {
-//            print(skill.skillName)
-//        }
-//    }
