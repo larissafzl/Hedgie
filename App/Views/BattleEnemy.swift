@@ -36,13 +36,12 @@ struct BattleEnemy: View {
                 if let skill = randomSkill {
                     self.updateCharacterLife(for: characterDataViewModel.hedgie, with: skill.strength)
                 }
-                
-                if characterDataViewModel.hedgie.currentLife == 0 {
-                    goToDefeatView = true
-                }
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                if characterDataViewModel.hedgie.currentLife == 0 {
+                    goToDefeatView = true
+                }
                 goToNextView = true
             }
         }

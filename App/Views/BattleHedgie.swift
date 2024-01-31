@@ -32,15 +32,14 @@ struct BattleHedgie: View {
             UINavigationBar.setAnimationsEnabled(false)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                if characterDataViewModel.otty.currentLife == characterDataViewModel.otty.totalLife {
+                    goToVictoryView = true
+                }
                 goToNextView = true
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 handleConfirmation()
-                
-                if characterDataViewModel.otty.currentLife == characterDataViewModel.otty.totalLife {
-                    goToVictoryView = true
-                }
             }
             
             copiedActiveButton = activeButton
