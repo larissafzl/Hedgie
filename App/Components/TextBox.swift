@@ -112,6 +112,8 @@ struct TextBoxBattleHedgie: View {
 }
 
 struct TextBoxBattleEnemy: View {
+    let skillName: String
+    
     var body: some View {
         VStack {
             Spacer()
@@ -125,7 +127,7 @@ struct TextBoxBattleEnemy: View {
                         Text("used")
                             .font(Font.custom("GillSans", size: 20))
                         
-                        Text("SkillName")
+                        Text(skillName)
                             .font(Font.custom("GillSans", size: 20)).italic()
                         
                         Text("and tired")

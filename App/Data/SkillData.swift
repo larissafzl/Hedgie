@@ -86,3 +86,17 @@ class SkillDataViewModel: ObservableObject {
         self.skillFour = SkillData(skillName: "Nod Head", description: "Protect yourself for 1 turn", type: .defensive, strength: 0, cooldown: 2, remainingCooldown: 3)
     }
 }
+
+class OttySkillData: ObservableObject {
+    @Published var skillOne: SkillData
+    @Published var skillTwo: SkillData
+    @Published var skillThree: SkillData
+    @Published var skillFour: SkillData
+
+    init() {
+        self.skillOne = SkillData(skillName: "Tell a Joke", description: "Social Energy", type: .defensive, strength: 5, cooldown: 1, remainingCooldown: 2)
+        self.skillTwo = SkillData(skillName: "Gossip", description: "Social Energy", type: .defensive, strength: 5, cooldown: 2, remainingCooldown: 3)
+        self.skillThree = SkillData(skillName: "Vent", description: "Social Energy", type: .defensive, strength: 10, cooldown: 3, remainingCooldown: 4)
+        self.skillFour = SkillData(skillName: "Invite You to Hang Out", description: "Social Energy", type: .defensive, strength: 15, cooldown: 2, remainingCooldown: 3)
+    }
+}
