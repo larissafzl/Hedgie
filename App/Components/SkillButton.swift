@@ -38,7 +38,7 @@ struct Cooldown: View {
 
 struct SkillLoading: View {
     @ObservedObject var skill: SkillData
-    @ObservedObject var skillDataViewModel: SkillDataViewModel
+    @EnvironmentObject var skillDataViewModel: SkillDataViewModel
 
     var body: some View {
         if skillDataViewModel.confirmedSkills[skill] == true && skill.remainingCooldown > 0 {
@@ -60,7 +60,7 @@ struct SkillLoading: View {
 struct SkillButton: View {
     @ObservedObject var skill: SkillData
     @Binding var activeButton: SkillData?
-    @ObservedObject var skillDataViewModel: SkillDataViewModel
+    @EnvironmentObject var skillDataViewModel: SkillDataViewModel
 
     var body: some View {
         buttonContent
@@ -82,13 +82,13 @@ struct SkillButton: View {
             .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
             .shadow(color: activeButton == skill ? .black.opacity(0.5) : .clear, radius: 5, x: 0, y: 5)
             .overlay(SkillButtonText(skill: skill))
-            .overlay(SkillLoading(skill: skill, skillDataViewModel: skillDataViewModel))
+            .overlay(SkillLoading(skill: skill))
             .overlay(activeButton == skill ? Cooldown(skill: skill) : nil)
     }
 }
 
 struct SkillButtons: View {
-    @ObservedObject var skillDataViewModel: SkillDataViewModel
+    @EnvironmentObject var skillDataViewModel: SkillDataViewModel
     @Binding var activeButton: SkillData?
 
     var body: some View {
@@ -96,10 +96,10 @@ struct SkillButtons: View {
             Spacer()
 
             HStack(spacing: 5) {
-                SkillButton(skill: skillDataViewModel.skillOne, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
-                SkillButton(skill: skillDataViewModel.skillTwo, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
-                SkillButton(skill: skillDataViewModel.skillThree, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
-                SkillButton(skill: skillDataViewModel.skillFour, activeButton: $activeButton, skillDataViewModel: skillDataViewModel)
+                SkillButton(skill: skillDataViewModel.skillOne, activeButton: $activeButton)
+                SkillButton(skill: skillDataViewModel.skillTwo, activeButton: $activeButton)
+                SkillButton(skill: skillDataViewModel.skillThree, activeButton: $activeButton)
+                SkillButton(skill: skillDataViewModel.skillFour, activeButton: $activeButton)
             }
         }
     }
@@ -142,8 +142,8 @@ struct SkillButtonText: View {
 
 struct ConfirmButton: View {
     @Binding var activeButton: SkillData?
-    @ObservedObject var characterDataViewModel: CharacterDataViewModel
-    @ObservedObject var skillDataViewModel: SkillDataViewModel
+    @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
+    @EnvironmentObject var skillDataViewModel: SkillDataViewModel
     
     var body: some View {
         VStack {
@@ -207,14 +207,14 @@ struct ConfirmButton: View {
 }
 
 struct Hotbar: View {
-    @ObservedObject var skillDataViewModel: SkillDataViewModel
-    @ObservedObject var characterDataViewModel: CharacterDataViewModel
+    @EnvironmentObject var skillDataViewModel: SkillDataViewModel
+    @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
     @State private var activeButton: SkillData? = nil
     
     var body: some View {
         HStack(spacing: 5) {
-            SkillButtons(skillDataViewModel: skillDataViewModel, activeButton: $activeButton)
-            ConfirmButton(activeButton: $activeButton, characterDataViewModel: characterDataViewModel, skillDataViewModel: skillDataViewModel)
+            SkillButtons(activeButton: $activeButton)
+            ConfirmButton(activeButton: $activeButton)
         }
         .padding(.leading, 110)
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StatsBalloonLeft: View {
-    @ObservedObject var characterDataViewModel: CharacterDataViewModel
+    @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
     @ObservedObject var character: CharacterData
     
     var body: some View {
@@ -25,7 +25,7 @@ struct StatsBalloonLeft: View {
 }
 
 struct StatsBalloonRight: View {
-    @ObservedObject var characterDataViewModel: CharacterDataViewModel
+    @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
     @ObservedObject var character: CharacterData
     
     var body: some View {
