@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - IntroView1
+// MARK: - FirstIntroPart
 
-struct IntroView1: View {
+struct FirstIntroPart: View {
     @State private var currentIndex = 0
     
     init() {
@@ -38,9 +38,9 @@ struct ContentView: View {
     }
 }
 
-// MARK: - IntroView2
+// MARK: - SecondIntroPart
 
-struct IntroView2: View {
+struct SecondIntroPart: View {
     @Binding var currentIndex: Int
     
     var body: some View {

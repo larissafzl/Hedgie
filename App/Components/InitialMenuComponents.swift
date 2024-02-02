@@ -35,7 +35,7 @@ struct GameTitle: View {
 struct StartButtonLink: View {
     var body: some View {
         NavigationLink {
-            IntroView1()
+            FirstIntroPart()
         } label: {
             StartButton()
         }

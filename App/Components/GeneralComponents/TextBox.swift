@@ -18,7 +18,7 @@ struct TextBoxView: View {
 // Displays dynamic text based on the provided content
 struct TextView: View {
     @Binding var currentIndex: Int
-    var textContent: [ContentIntroView1.TextPart]
+    var textContent: [IntroContent.TextPart]
 
     var body: some View {
         // Concatenates the text content into a single Text view
