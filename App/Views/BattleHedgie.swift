@@ -17,7 +17,7 @@ struct BattleHedgie: View {
     
     var body: some View {
         ZStack {
-            Background()
+            DarkBackground()
             
             TurnBoxHedgie()
             

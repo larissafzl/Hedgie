@@ -10,7 +10,7 @@ import SwiftUI
 struct BattleView: View {
     var body: some View {
         ZStack {
-            Background()
+            DarkBackground()
             
             TurnBoxHedgie()
             

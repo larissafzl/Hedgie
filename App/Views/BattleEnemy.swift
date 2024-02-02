@@ -16,7 +16,7 @@ struct BattleEnemy: View {
 
     var body: some View {
         ZStack {
-            Background()
+            DarkBackground()
 
             TurnBoxEnemy()
 

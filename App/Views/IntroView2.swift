@@ -12,7 +12,7 @@ struct IntroView2: View {
     
     var body: some View {
         ZStack {
-            Background()
+            RainyBackground()
             
             VStack(spacing: 32) {
                 Spacer()

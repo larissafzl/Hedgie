@@ -7,10 +7,41 @@
 
 import SwiftUI
 
-struct Background: View {
+struct LightBackground: View {
     var body: some View {
-        Rectangle()
-            .edgesIgnoringSafeArea(.all)
-            .foregroundColor(Color("green"))
+        GeometryReader { geometry in
+            Image("lightBackground")
+                .resizable()
+                .scaledToFill()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct DarkBackground: View {
+    var body: some View {
+        GeometryReader { geometry in
+            Image("darkBackground")
+                .resizable()
+                .scaledToFill()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct RainyBackground: View {
+    var body: some View {
+        GeometryReader { geometry in
+            Image("rainyBackground")
+                .resizable()
+                .scaledToFill()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
