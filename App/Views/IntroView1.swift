@@ -28,5 +28,6 @@ struct IntroView1: View {
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }

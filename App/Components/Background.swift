@@ -45,3 +45,41 @@ struct RainyBackground: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
+
+struct InitialMenuBackground: View {
+    var body: some View {
+        GeometryReader { geometry in
+            Image("initialMenu")
+                .resizable()
+                .scaledToFill()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct CharactersImage: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            HStack {
+                Image("shockedHedge")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 130, height: 120)
+                    .rotationEffect(Angle(degrees: -5))
+                
+                Spacer()
+                
+                Image("superHappyOtter")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 130, height: 120)
+                    .rotationEffect(Angle(degrees: 5))
+            }
+            .padding(.bottom)
+        }
+    }
+}
