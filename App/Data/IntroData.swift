@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - ContentIntroView1 Struct
+
 struct ContentIntroView1 {
     struct TextPart {
         let text: String
@@ -17,6 +19,8 @@ struct ContentIntroView1 {
     let imageName: String
     let textContent: [TextPart]
 }
+
+// MARK: - Content Array
 
 let content: [ContentIntroView1] = [
     ContentIntroView1(imageName: "happyHedge", textContent: [

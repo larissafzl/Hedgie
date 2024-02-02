@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - StatsBalloonLeft View
+
 struct StatsBalloonLeft: View {
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
     @ObservedObject var character: CharacterData
@@ -23,6 +25,8 @@ struct StatsBalloonLeft: View {
             )
     }
 }
+
+// MARK: - StatsBalloonRight View
 
 struct StatsBalloonRight: View {
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
@@ -41,6 +45,8 @@ struct StatsBalloonRight: View {
     }
 }
 
+// MARK: - HedgieStatsView View
+
 struct HedgieStatsView: View {
     @ObservedObject var character: CharacterData
     
@@ -49,11 +55,7 @@ struct HedgieStatsView: View {
             Text("\(character.name)")
                 .font(Font.custom("GillSans", size: 20)).italic()
             
-            HStack(spacing: 16) {
-                Text("\(character.lifeType == .socialEnergy ? "Social Energy" : "Quality Time")")
-                Text(String(format: "%.0f/%.0f", character.currentLife, character.totalLife))
-            }
-            .font(Font.custom("GillSans", size: 14))
+            LifeTypeView(character: character)
             
             ProgressView(value: character.currentLife / character.totalLife)
                 .frame(width: 135)
@@ -66,6 +68,8 @@ struct HedgieStatsView: View {
     }
 }
 
+// MARK: - EnemyStatsView View
+
 struct EnemyStatsView: View {
     @ObservedObject var character: CharacterData
     
@@ -74,11 +78,7 @@ struct EnemyStatsView: View {
             Text("\(character.name)")
                 .font(Font.custom("GillSans", size: 20)).italic()
             
-            HStack(spacing: 16) {
-                Text("\(character.lifeType == .socialEnergy ? "Social Energy" : "Quality Time")")
-                Text(String(format: "%.0f/%.0f", character.currentLife, character.totalLife))
-            }
-            .font(Font.custom("GillSans", size: 14))
+            LifeTypeView(character: character)
             
             ProgressView(value: character.currentLife / character.totalLife)
                 .frame(width: 135)
@@ -88,5 +88,19 @@ struct EnemyStatsView: View {
         }
         .padding(.trailing, 320)
         .padding(.top, 23)
+    }
+}
+
+// MARK: - LifeTypeView View
+
+struct LifeTypeView: View {
+    @ObservedObject var character: CharacterData
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            Text("\(character.lifeType == .socialEnergy ? "Social Energy" : "Quality Time")")
+            Text(String(format: "%.0f/%.0f", character.currentLife, character.totalLife))
+        }
+        .font(Font.custom("GillSans", size: 14))
     }
 }

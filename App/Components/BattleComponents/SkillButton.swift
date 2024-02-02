@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - Cooldown View
+
 struct Cooldown: View {
     @ObservedObject var skill: SkillData
     
@@ -36,6 +38,8 @@ struct Cooldown: View {
     }
 }
 
+// MARK: - SkillLoading View
+
 struct SkillLoading: View {
     @ObservedObject var skill: SkillData
     @EnvironmentObject var skillDataViewModel: SkillDataViewModel
@@ -56,6 +60,8 @@ struct SkillLoading: View {
             )
     }
 }
+
+// MARK: - SkillButton View
 
 struct SkillButton: View {
     @ObservedObject var skill: SkillData
@@ -87,6 +93,8 @@ struct SkillButton: View {
     }
 }
 
+// MARK: - SkillButtons View
+
 struct SkillButtons: View {
     @EnvironmentObject var skillDataViewModel: SkillDataViewModel
     @Binding var activeButton: SkillData?
@@ -104,6 +112,8 @@ struct SkillButtons: View {
         }
     }
 }
+
+// MARK: - SkillButtonText View
 
 struct SkillButtonText: View {
     @ObservedObject var skill: SkillData
@@ -140,6 +150,8 @@ struct SkillButtonText: View {
     }
 }
 
+// MARK: - ConfirmButton View
+
 struct ConfirmButton: View {
     @Binding var activeButton: SkillData?
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
@@ -172,6 +184,8 @@ struct ConfirmButton: View {
         .disabled(activeButton == nil)
     }
 }
+
+// MARK: - Hotbar View
 
 struct Hotbar: View {
     @EnvironmentObject var skillDataViewModel: SkillDataViewModel

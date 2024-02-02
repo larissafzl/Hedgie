@@ -7,21 +7,19 @@
 
 import SwiftUI
 
+// MARK: - InitialMenuComponents View
+
 struct InitialMenuComponents: View {
     var body: some View {
         VStack {
             GameTitle()
-            
-            NavigationLink {
-                IntroView1()
-            } label: {
-                StartButton()
-            }
-            
+            StartButtonLink()
             AboutButton()
         }
     }
 }
+
+// MARK: - GameTitle View
 
 struct GameTitle: View {
     var body: some View {
@@ -31,6 +29,20 @@ struct GameTitle: View {
             .frame(width: 490, height: 250)
     }
 }
+
+// MARK: - StartButtonLink View
+
+struct StartButtonLink: View {
+    var body: some View {
+        NavigationLink {
+            IntroView1()
+        } label: {
+            StartButton()
+        }
+    }
+}
+
+// MARK: - StartButton View
 
 struct StartButton: View {
     var body: some View {
@@ -44,6 +56,8 @@ struct StartButton: View {
             )
     }
 }
+
+// MARK: - AboutButton View
 
 struct AboutButton: View {
     var body: some View {

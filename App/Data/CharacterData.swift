@@ -7,10 +7,14 @@
 
 import SwiftUI
 
+// MARK: - LifeType Enum
+
 enum LifeType {
     case socialEnergy
     case qualityTime
 }
+
+// MARK: - CharacterData Class
 
 class CharacterData: ObservableObject {
     @Published var name: String
@@ -25,6 +29,8 @@ class CharacterData: ObservableObject {
         self.currentLife = Double(currentLife)
     }
 }
+
+// MARK: - CharacterDataViewModel Class
 
 class CharacterDataViewModel: ObservableObject {
     @Published var hedgie: CharacterData

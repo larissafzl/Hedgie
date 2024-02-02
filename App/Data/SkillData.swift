@@ -7,10 +7,14 @@
 
 import SwiftUI
 
+// MARK: - SkillType Enum
+
 enum SkillType {
     case offensive
     case defensive
 }
+
+// MARK: - SkillData Class
 
 class SkillData: ObservableObject, Equatable, Hashable {
     static func == (lhs: SkillData, rhs: SkillData) -> Bool {
@@ -28,13 +32,13 @@ class SkillData: ObservableObject, Equatable, Hashable {
         hasher.combine(strength)
         hasher.combine(cooldown)
     }
-    
+
     func decreaseCooldown() {
         if remainingCooldown > 0 {
             remainingCooldown -= 1
         }
     }
-    
+
     func resetCooldown() {
         remainingCooldown = cooldown + 1
     }
@@ -57,6 +61,8 @@ class SkillData: ObservableObject, Equatable, Hashable {
     }
 }
 
+// MARK: - SkillDataViewModel Class
+
 class SkillDataViewModel: ObservableObject {
     @Published var skillOne: SkillData
     @Published var skillTwo: SkillData
@@ -64,7 +70,7 @@ class SkillDataViewModel: ObservableObject {
     @Published var skillFour: SkillData
 
     @Published var confirmedSkills: [SkillData: Bool] = [:]
-    
+
     func decreaseCooldowns() {
         for (skill, confirmed) in confirmedSkills {
             if confirmed {
@@ -86,6 +92,8 @@ class SkillDataViewModel: ObservableObject {
         self.skillFour = SkillData(skillName: "Nod Head", description: "Social Energy", type: .defensive, strength: 15.0, cooldown: 3, remainingCooldown: 4)
     }
 }
+
+// MARK: - OttySkillData Class
 
 class OttySkillData: ObservableObject {
     @Published var skillOne: SkillData

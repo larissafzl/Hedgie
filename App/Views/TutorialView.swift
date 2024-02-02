@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - Background Views
+
 struct BlackBackground: View {
     var body: some View {
         Rectangle()
@@ -62,43 +64,6 @@ struct TutorialArrow: View {
                     .padding(.trailing, 20)
             }
         }
-    }
-}
-
-struct TutorialViewTitle: View {
-    var titleCalled: String
-    
-    var body: some View {
-        Image(titleCalled)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 140, height: 40)
-    }
-}
-
-struct TutorialView1Text: View {
-    var body: some View {
-        VStack {
-            HStack {
-                Text("Help")
-                
-                Text("Hedgie's").italic()
-                
-                Text("socialization by preserving his")
-                
-                Text("Social Energy").italic().foregroundColor(Color("blue"))
-            }
-            
-            HStack {
-
-                Text("and increasing the opponent's")
-
-                Text("Quality Time").italic().foregroundColor(Color("red"))
-            }
-        }
-        .font(Font.custom("GillSans", size: 20))
-        .foregroundColor(.white)
-        .padding(.horizontal, 32)
     }
 }
 
@@ -324,6 +289,44 @@ struct SkillCooldown: View {
     }
 }
 
+// MARK: - Tutorial Views
+
+struct TutorialViewTitle: View {
+    var titleCalled: String
+    
+    var body: some View {
+        Image(titleCalled)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 140, height: 40)
+    }
+}
+
+struct TutorialView1Text: View {
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Help")
+                
+                Text("Hedgie's").italic()
+                
+                Text("socialization by preserving his")
+                
+                Text("Social Energy").italic().foregroundColor(Color("blue"))
+            }
+            
+            HStack {
+
+                Text("and increasing the opponent's")
+
+                Text("Quality Time").italic().foregroundColor(Color("red"))
+            }
+        }
+        .font(Font.custom("GillSans", size: 20))
+        .foregroundColor(.white)
+        .padding(.horizontal, 32)
+    }
+}
 
 struct TutorialView1: View {
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
