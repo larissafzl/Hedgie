@@ -334,32 +334,36 @@ struct TutorialView1: View {
     
     var body: some View {
         ZStack {
-            BlackBackground()
+            BattleView()
             
-            BrownRectangle()
-                .overlay(
-                    VStack(spacing: 16) {
-                        Spacer()
-                        
-                        TutorialViewTitle(titleCalled: "yourGoal")
-                        
-                        TutorialView1Text()
-                        
-                        Balloons()
-                        
-                        Spacer()
-                    }
-                )
-                .overlay(
-                    TutorialIndex(currentIndex: "1/3")
-                )
-                .overlay(
-                    NavigationLink(destination: {
-                        TutorialView2()
-                    }, label: {
-                        TutorialArrow()
-                    })
-                )
+            ZStack {
+                BlackBackground()
+                
+                BrownRectangle()
+                    .overlay(
+                        VStack(spacing: 16) {
+                            Spacer()
+                            
+                            TutorialViewTitle(titleCalled: "yourGoal")
+                            
+                            TutorialView1Text()
+                            
+                            Balloons()
+                            
+                            Spacer()
+                        }
+                    )
+                    .overlay(
+                        TutorialIndex(currentIndex: "1/3")
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            TutorialView2()
+                        }, label: {
+                            TutorialArrow()
+                        })
+                    )
+            }
         }
     }
 }
@@ -372,35 +376,39 @@ struct TutorialView2: View {
     
     var body: some View {
         ZStack {
-            BlackBackground()
+            BattleView()
+            
+            ZStack {
+                BlackBackground()
 
-            BrownRectangle()
-                .overlay(
-                    VStack(spacing: 16) {
-                        Spacer()
+                BrownRectangle()
+                    .overlay(
+                        VStack(spacing: 16) {
+                            Spacer()
 
-                        TutorialViewTitle(titleCalled: "yourSkills")
+                            TutorialViewTitle(titleCalled: "yourSkills")
 
-                        HStack(spacing: 32) {
-                            RedSkills()
-                            BlueSkills()
+                            HStack(spacing: 32) {
+                                RedSkills()
+                                BlueSkills()
+                            }
+
+                            Spacer()
                         }
-
-                        Spacer()
-                    }
-                )
-                .overlay(
-                    TutorialIndex(currentIndex: "2/3")
-                )
-                .overlay(
-                    NavigationLink(destination: {
-                        TutorialView3()
-                    }, label: {
-                        TutorialArrow()
-                    })
-                )
+                    )
+                    .overlay(
+                        TutorialIndex(currentIndex: "2/3")
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            TutorialView3()
+                        }, label: {
+                            TutorialArrow()
+                        })
+                    )
+            }
+            .navigationBarBackButtonHidden(true)
         }
-        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -412,31 +420,35 @@ struct TutorialView3: View {
     
     var body: some View {
         ZStack {
-            BlackBackground()
+            BattleView()
+            
+            ZStack {
+                BlackBackground()
 
-            BrownRectangle()
-                .overlay(
-                    VStack(spacing: 16) {
-                        Spacer()
+                BrownRectangle()
+                    .overlay(
+                        VStack(spacing: 16) {
+                            Spacer()
 
-                        TutorialViewTitle(titleCalled: "cooldown")
+                            TutorialViewTitle(titleCalled: "cooldown")
 
-                        SkillCooldown()
+                            SkillCooldown()
 
-                        Spacer()
-                    }
-                )
-                .overlay(
-                    TutorialIndex(currentIndex: "3/3")
-                )
-                .overlay(
-                    NavigationLink(destination: {
-                        BattleView()
-                    }, label: {
-                        TutorialArrow()
-                    })
-                )
+                            Spacer()
+                        }
+                    )
+                    .overlay(
+                        TutorialIndex(currentIndex: "3/3")
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            BattleView()
+                        }, label: {
+                            TutorialArrow()
+                        })
+                    )
+            }
+            .navigationBarBackButtonHidden(true)
         }
-        .navigationBarBackButtonHidden(true)
     }
 }

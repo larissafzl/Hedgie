@@ -157,12 +157,12 @@ struct ConfirmButton: View {
             BattleHedgie(activeButton: $activeButton)
         } label: {
             RoundedRectangle(cornerRadius: 30)
-                .foregroundColor(Color("orange"))
+                .foregroundColor(Color("brown"))
                 .frame(width: 110, height: 40)
                 .overlay(
                     Text("Confirm")
                         .font(Font.custom("GillSans", size: 20))
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                 )
         }
         .overlay(

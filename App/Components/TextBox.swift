@@ -53,7 +53,7 @@ struct TextBoxIntroView2: View {
     var body: some View {
         TextBoxView()
             .overlay(
-                NavigationLink(destination: BattleView()) {
+                NavigationLink(destination: TutorialView1()) {
                     ArrowButtonView()
                 }
             )

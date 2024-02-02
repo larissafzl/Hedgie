@@ -11,7 +11,7 @@ struct ArrowButton: View {
     var body: some View {
         Image(systemName: "triangleshape.fill")
             .rotationEffect(.degrees(90))
-            .foregroundColor(Color("orange"))
+            .foregroundColor(Color("brown"))
             .padding()
     }
 }
