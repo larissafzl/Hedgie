@@ -37,6 +37,13 @@ struct VictoryView: View {
                         }
                         .font(Font.custom("GillSans", size: 20))
                     )
+                    .overlay(
+                        NavigationLink(destination: {
+                            FirstEndView()
+                        }, label: {
+                            ArrowButtonView()
+                        })
+                    )
 
                 Spacer()
             }
@@ -76,7 +83,76 @@ struct DefeatView: View {
                         }
                         .font(Font.custom("GillSans", size: 20))
                     )
+                    .overlay(
+                        NavigationLink(destination: {
+                            FirstEndView()
+                        }, label: {
+                            ArrowButtonView()
+                        })
+                    )
 
+                Spacer()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+// MARK: - EndView
+
+struct FirstEndView: View {
+    
+    init() {
+        UINavigationBar.setAnimationsEnabled(false)
+    }
+    
+    var body: some View {
+        ZStack {
+            LightBackground()
+        
+            VStack(spacing: 32) {
+                Spacer()
+                
+                CharacterImageStandard(imageName: "hedge")
+                TextBoxView()
+                    .overlay(
+                        HStack {
+                            Text("In any way,")
+                            Text("Hedgie").italic()
+                            Text("is very grateful for your help!")
+                        }
+                        .font(Font.custom("GillSans", size: 20))
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            SecondEndView()
+                        }, label: {
+                            ArrowButtonView()
+                        })
+                    )
+                
+                Spacer()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct SecondEndView: View {
+    var body: some View {
+        ZStack {
+            LightBackground()
+        
+            VStack(spacing: 32) {
+                Spacer()
+                
+                CharacterImageStandard(imageName: "happyHedge")
+                TextBoxView()
+                    .overlay(
+                        Text("He will keep on trying until it gets better.")
+                            .font(Font.custom("GillSans", size: 20))
+                    )
+                
                 Spacer()
             }
         }

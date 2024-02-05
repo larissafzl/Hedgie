@@ -92,12 +92,8 @@ struct HedgiesIntro: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            // Introduce a delay of 3 seconds (adjust as needed)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                // Update the currentIndex after the delay
                 currentIndex = (currentIndex + 1) % content.count
-                
-                // Set isActive to true to trigger the NavigationLink
                 isActive = true
             }
         }

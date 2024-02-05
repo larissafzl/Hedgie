@@ -10,7 +10,7 @@ struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                FirstIntroPart(currentIndex: $currentIndex)
+                InitialMenu(currentIndex: $currentIndex)
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)

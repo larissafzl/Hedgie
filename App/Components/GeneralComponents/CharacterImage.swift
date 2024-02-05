@@ -18,6 +18,17 @@ struct CharacterImage: View {
     }
 }
 
+struct CharacterImageStandard: View {
+    var imageName: String
+    
+    var body: some View {
+        Image(imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 210, height: 195)
+    }
+}
+
 struct CharacterImageSmall: View {
     var imageName: String
     
