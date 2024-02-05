@@ -80,6 +80,7 @@ struct SecondContentView: View {
 struct HedgiesIntro: View {
     @Binding var currentIndex: Int
     @State private var isActive: Bool = false
+    @State private var shake = false
     
     var body: some View {
         ZStack {
@@ -88,23 +89,29 @@ struct HedgiesIntro: View {
             Image("shockedHedge")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 350, height: 350)
+                .frame(width: 300, height: 300)
+                .rotationEffect(Angle(degrees: shake ? 0 : 0))
+                .onAppear() {
+                    withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
+                        self.shake.toggle()
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        currentIndex = (currentIndex + 1) % content.count
+                        isActive = true
+                    }
+                    
+                }
+                .navigationBarBackButtonHidden(true)
+                .background(
+                    NavigationLink(
+                        destination: FirstIntroPart(currentIndex: $currentIndex),
+                        isActive: $isActive
+                    ) {
+                        EmptyView()
+                    }
+                        .hidden()
+                )
         }
-        .navigationBarBackButtonHidden(true)
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                currentIndex = (currentIndex + 1) % content.count
-                isActive = true
-            }
-        }
-        .background(
-            NavigationLink(
-                destination: FirstIntroPart(currentIndex: $currentIndex),
-                isActive: $isActive
-            ) {
-                EmptyView()
-            }
-            .hidden()
-        )
     }
 }
