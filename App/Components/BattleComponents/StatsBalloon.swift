@@ -60,6 +60,8 @@ struct HedgieStatsView: View {
             ProgressView(value: character.currentLife / character.totalLife)
                 .frame(width: 135)
                 .tint(character.lifeType == .socialEnergy ? Color("blue") : Color("red"))
+                .scaleEffect(x: 1, y: 2, anchor: .center)
+                .padding(.top, 3)
             
             Spacer()
         }
@@ -83,6 +85,8 @@ struct EnemyStatsView: View {
             ProgressView(value: character.currentLife / character.totalLife)
                 .frame(width: 135)
                 .tint(character.lifeType == .socialEnergy ? Color("blue") : Color("red"))
+                .scaleEffect(x: 1, y: 2, anchor: .center)
+                .padding(.top, 3)
             
             Spacer()
         }

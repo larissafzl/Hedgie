@@ -88,6 +88,8 @@ struct Balloons: View {
                         ProgressView(value: 1)
                             .frame(width: 135)
                             .tint(Color("blue"))
+                            .scaleEffect(x: 1, y: 2, anchor: .center)
+                            .padding(.top, 3)
                         
                         Spacer()
                     }
@@ -112,6 +114,8 @@ struct Balloons: View {
                         ProgressView(value: 0.3)
                             .frame(width: 135)
                             .tint(Color("red"))
+                            .scaleEffect(x: 1, y: 2, anchor: .center)
+                            .padding(.top, 3)
                         
                         Spacer()
                     }
