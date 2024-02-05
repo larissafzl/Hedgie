@@ -25,10 +25,15 @@ struct VictoryView: View {
 
                 TextBoxView()
                     .overlay(
-                        HStack {
-                            Text("Otty, the friendly friend,").italic()
-                            Text("had a great quality time with")
-                            Text("Hedgie!").italic()
+                        VStack {
+                            HStack {
+                                Text("Hedgie").italic()
+                                Text("tried his best and")
+                                Text("Otty, the friendly friend,").italic()
+                            }
+                            HStack {
+                                Text("had a great quality time with him!")
+                            }
                         }
                         .font(Font.custom("GillSans", size: 20))
                     )
@@ -61,11 +66,11 @@ struct DefeatView: View {
                         VStack {
                             HStack {
                                 Text("Hedgie's").italic()
-                                Text("social energy was drained and he needed to go...")
+                                Text("social energy was drained and he needed to go.")
                             }
                             HStack {
-                                Text("But that's okay,")
-                                Text("Otty").italic()
+                                Text("But that's okay.")
+                                Text("Otty, the friendly friend,").italic()
                                 Text("understands.")
                             }
                         }

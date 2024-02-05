@@ -24,25 +24,32 @@ struct IntroContent {
 
 let content: [IntroContent] = [
     IntroContent(imageName: "happyHedge", textContent: [
-        IntroContent.TextPart(text: "Meet", fontName: "GillSans", isItalic: false),
+        IntroContent.TextPart(text: "This is the story of", fontName: "GillSans", isItalic: false),
         IntroContent.TextPart(text: " Hedgie, the socially anxious hedgehog", fontName: "GillSans-Italic", isItalic: true),
         IntroContent.TextPart(text: "!", fontName: "GillSans", isItalic: false)
     ]),
     
     IntroContent(imageName: "hedge", textContent: [
-        IntroContent.TextPart(text: "As his name already says, ", fontName: "GillSans", isItalic: false),
-        IntroContent.TextPart(text: "Hedgie", fontName: "GillSans-Italic", isItalic: true),
-        IntroContent.TextPart(text: " was diagnosed with social anxiety.", fontName: "GillSans", isItalic: false)
+        IntroContent.TextPart(text: "Say hi to the player, ", fontName: "GillSans", isItalic: false),
+        IntroContent.TextPart(text: " Hedgie", fontName: "GillSans-Italic", isItalic: true),
+        IntroContent.TextPart(text: "!", fontName: "GillSans", isItalic: false)
     ]),
     
     IntroContent(imageName: "sadHedge", textContent: [
-        IntroContent.TextPart(text: "This, unfortunately, means that even the most casual socialization can feel like a tough ", fontName: "GillSans", isItalic: false),
+        IntroContent.TextPart(text: "Sorry, buddy.  As I said, ", fontName: "GillSans", isItalic: false),
+        IntroContent.TextPart(text: "Hedgie ", fontName: "GillSans-Italic", isItalic: true),
+        IntroContent.TextPart(text: "was diagnosed with social anxiety.", fontName: "GillSans", isItalic: false)
+    ]),
+    
+    IntroContent(imageName: "hedge", textContent: [
+        IntroContent.TextPart(text: "This, unfortunately, means that even the most casual socializations can feel like a tough ", fontName: "GillSans", isItalic: false),
         IntroContent.TextPart(text: "battle ", fontName: "GillSans-Italic", isItalic: true),
         IntroContent.TextPart(text: "to him.", fontName: "GillSans", isItalic: false)
     ]),
     
     IntroContent(imageName: "hedge", textContent: [
-        IntroContent.TextPart(text: "However, it's... Oops, I'm sorry, it seems like someone is coming.", fontName: "GillSans", isItalic: false)
+        IntroContent.TextPart(text: "Hedgie ", fontName: "GillSans-Italic", isItalic: true),
+        IntroContent.TextPart(text: "knows he's not alone in this, but... Oops, it seems like someone is coming.", fontName: "GillSans", isItalic: false)
     ]),
     
     IntroContent(imageName: "hiOtter", textContent: [
