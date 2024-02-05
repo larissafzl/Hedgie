@@ -11,6 +11,14 @@ struct HedgieApp: App {
         WindowGroup {
             NavigationView {
                 InitialMenu(currentIndex: $currentIndex)
+                    .onAppear {
+                        // Print initial value when the view appears
+                        print("Initial Index: \(currentIndex)")
+                    }
+                    .onChange(of: currentIndex) { newIndex in
+                        // Print whenever currentIndex changes
+                        print("Current Index: \(newIndex)")
+                    }
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)
