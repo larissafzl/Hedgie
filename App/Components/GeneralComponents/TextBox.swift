@@ -88,24 +88,22 @@ struct TextBoxBattleHedgie: View {
                 .padding(.vertical, 24)
                 .overlay(
                     HStack {
-                        Text("Hedgie")
-                            .font(Font.custom("GillSans", size: 20)).italic()
-                        
-                        Text("used")
-                            .font(Font.custom("GillSans", size: 20))
-                        
-                        Text("\(activeButton?.skillName ?? "No Skill Selected")")
-                            .font(Font.custom("GillSans", size: 20)).italic()
-                        
-                        Text("and made")
-                            .font(Font.custom("GillSans", size: 20))
-                        
-                        Text("Otty")
-                            .font(Font.custom("GillSans", size: 20)).italic()
-                        
-                        Text("happy!")
-                            .font(Font.custom("GillSans", size: 20))
+                        if activeButton?.type == .offensive {
+                            Text("Hedgie").italic()
+                            Text("used")
+                            Text("\(activeButton?.skillName ?? "No Skill Selected")").italic().bold()
+                            Text("and increased")
+                            Text("Otty's").italic()
+                            Text("Quality Time!").italic()
+                        } else {
+                            Text("Hedgie").italic()
+                            Text("used")
+                            Text("\(activeButton?.skillName ?? "No Skill Selected")").italic().bold()
+                            Text("and restored his")
+                            Text("Social Energy!").italic()
+                        }
                     }
+                    .font(Font.custom("GillSans", size: 20))
                 )
         }
     }
@@ -120,22 +118,19 @@ struct TextBoxBattleEnemy: View {
             TextBoxView()
                 .padding(.vertical, 24)
                 .overlay(
-                    HStack {
-                        Text("Otty")
-                            .font(Font.custom("GillSans", size: 20)).italic()
-                        
-                        Text("used")
-                            .font(Font.custom("GillSans", size: 20))
-                        
-                        Text(skillName)
-                            .font(Font.custom("GillSans", size: 20)).italic()
-                        
-                        Text("and tired")
-                            .font(Font.custom("GillSans", size: 20))
-                        
-                        Text("Hedgie!")
-                            .font(Font.custom("GillSans", size: 20)).italic()
+                    VStack {
+                        HStack {
+                            Text("Otty").italic()
+                            Text("used")
+                            Text(skillName).italic().bold().font(Font.custom("GillSans", size: 20))
+                            Text("and lowered")
+                        }
+                        HStack {
+                            Text("Hedgie's").italic()
+                            Text("Social Energy!").italic()
+                        }
                     }
+                    .font(Font.custom("GillSans", size: 20))
                 )
         }
     }
