@@ -31,14 +31,31 @@ struct CharacterImageStandard: View {
 
 struct CharacterImageSmall: View {
     var imageName: String
+    @State private var shake = false
+    @State private var jumpUp = false
     
     var body: some View {
         Image(imageName)
             .resizable()
             .scaledToFit()
             .frame(width: 180, height: 165)
+            .rotationEffect(Angle(degrees: shake ? 5 : 0))
+            .offset(y: jumpUp ? -5 : 5)
+            .onAppear() {
+                if imageName == "sadHedge" {
+                    withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
+                        self.shake.toggle()
+                    }
+                } else if imageName == "happyOtter" {
+                    withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
+                        self.jumpUp.toggle()
+                }
+            }
+        }
     }
 }
+
+
 
 // Gets and displays character images based on the current index
 struct GetCharacterImage: View {
