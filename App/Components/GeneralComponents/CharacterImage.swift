@@ -33,15 +33,16 @@ struct CharacterImageSmall: View {
     var imageName: String
     @State private var shake = false
     @State private var jumpUp = false
+    @State private var didAppear = false
     
     var body: some View {
         Image(imageName)
             .resizable()
             .scaledToFit()
             .frame(width: 180, height: 165)
-            .rotationEffect(Angle(degrees: shake ? 5 : 0))
+            .rotationEffect(Angle(degrees: shake ? -1.5 : 1.5))
             .offset(y: jumpUp ? -5 : 5)
-            .onAppear() {
+            .onChange(of: didAppear) { _ in
                 if imageName == "sadHedge" {
                     withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
                         self.shake.toggle()
@@ -49,15 +50,15 @@ struct CharacterImageSmall: View {
                 } else if imageName == "happyOtter" {
                     withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
                         self.jumpUp.toggle()
+                    }
                 }
             }
-        }
+            .onAppear {
+                didAppear = true
+            }
     }
 }
 
-
-
-// Gets and displays character images based on the current index
 struct GetCharacterImage: View {
     @Binding var currentIndex: Int
     var imageName: String

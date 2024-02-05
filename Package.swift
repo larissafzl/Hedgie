@@ -16,6 +16,7 @@ let package = Package(
         .iOSApplication(
             name: "Hedgie",
             targets: ["App"],
+            teamIdentifier: "MR249PWTJZ",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
