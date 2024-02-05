@@ -10,10 +10,12 @@ import SwiftUI
 // MARK: - InitialMenuComponents View
 
 struct InitialMenuComponents: View {
+    @Binding var currentIndex: Int
+    
     var body: some View {
         VStack {
             GameTitle()
-            StartButtonLink()
+            StartButtonLink(currentIndex: $currentIndex)
             AboutButton()
         }
     }
@@ -33,9 +35,11 @@ struct GameTitle: View {
 // MARK: - StartButtonLink View
 
 struct StartButtonLink: View {
+    @Binding var currentIndex: Int
+    
     var body: some View {
         NavigationLink {
-            FirstIntroPart()
+            FirstIntroPart(currentIndex: $currentIndex)
         } label: {
             StartButton()
         }

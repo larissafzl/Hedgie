@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct InitialMenu: View {
+    @Binding var currentIndex: Int
     
-    init() {
+    init(currentIndex: Binding<Int>) {
+        _currentIndex = currentIndex
         UINavigationBar.setAnimationsEnabled(false)
     }
     
@@ -17,7 +19,7 @@ struct InitialMenu: View {
         ZStack {
             InitialMenuBackground()
             
-            InitialMenuComponents()
+            InitialMenuComponents(currentIndex: $currentIndex)
             
             CharactersImage()
         }

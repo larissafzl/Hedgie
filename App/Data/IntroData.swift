@@ -35,13 +35,13 @@ let content: [IntroContent] = [
         IntroContent.TextPart(text: "!", fontName: "GillSans", isItalic: false)
     ]),
     
-    IntroContent(imageName: "sadHedge", textContent: [
+    IntroContent(imageName: "hedge", textContent: [
         IntroContent.TextPart(text: "Sorry, buddy.  As I said, ", fontName: "GillSans", isItalic: false),
         IntroContent.TextPart(text: "Hedgie ", fontName: "GillSans-Italic", isItalic: true),
         IntroContent.TextPart(text: "was diagnosed with social anxiety.", fontName: "GillSans", isItalic: false)
     ]),
     
-    IntroContent(imageName: "hedge", textContent: [
+    IntroContent(imageName: "sadHedge", textContent: [
         IntroContent.TextPart(text: "This, unfortunately, means that even the most casual socializations can feel like a tough ", fontName: "GillSans", isItalic: false),
         IntroContent.TextPart(text: "battle ", fontName: "GillSans-Italic", isItalic: true),
         IntroContent.TextPart(text: "to him.", fontName: "GillSans", isItalic: false)

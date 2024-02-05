@@ -40,6 +40,10 @@ struct ArrowButtonIntroView1: View {
             NavigationLink(destination: SecondIntroPart(currentIndex: $currentIndex)) {
                 ArrowButtonView()
             }
+        } else if currentIndex == 1 {
+            NavigationLink(destination: HedgiesIntro(currentIndex: $currentIndex)) {
+                ArrowButtonView()
+            }
         } else {
             ArrowButtonView()
                 .onTapGesture {
