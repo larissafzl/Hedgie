@@ -15,8 +15,11 @@ struct InitialMenuComponents: View {
     var body: some View {
         VStack {
             GameTitle()
+                .padding(.bottom, -60)
             StartButtonLink(currentIndex: $currentIndex)
+                .padding(.top, -10)
             AboutButton()
+                .padding(.top, -20)
         }
     }
 }
@@ -28,7 +31,8 @@ struct GameTitle: View {
         Image("theHedgehogsDilemma")
             .resizable()
             .scaledToFill()
-            .frame(width: 490, height: 250)
+            .frame(width: 540, height: 300)
+            .padding(.bottom, 40)
     }
 }
 
@@ -50,14 +54,15 @@ struct StartButtonLink: View {
 
 struct StartButton: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 30)
-            .foregroundColor(Color("brown"))
-            .frame(width: 130, height: 40)
-            .overlay(
-                Text("Start")
-                    .foregroundColor(.white)
-                    .font(Font.custom("GillSans", size: 20))
+        Text("Start")
+            .foregroundColor(.white)
+            .font(Font.custom("GillSans", size: 28))
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundColor(Color("brown"))
+                    .frame(width: 140, height: 60)
             )
+            .padding(.bottom, 40)
     }
 }
 
@@ -65,13 +70,18 @@ struct StartButton: View {
 
 struct AboutButton: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 30)
-            .foregroundColor(Color("brown"))
-            .frame(width: 100, height: 30)
-            .overlay(
-                Text("About")
-                    .foregroundColor(.white)
-                    .font(Font.custom("GillSans", size: 16))
+        Text("About")
+            .foregroundColor(.white)
+            .font(Font.custom("GillSans", size: 20))
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundColor(Color("brown"))
+                    .opacity(0.8)
+                    .frame(width: 90, height: 40)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color("brown"), lineWidth: 2) // Adjust the color and lineWidth as needed
+                    )
             )
     }
 }
