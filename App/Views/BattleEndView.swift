@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - VictoryView
 
 struct VictoryView: View {
+    @State private var jumpUpHedge = false
+    @State private var jumpUpOtter = false
+    @State private var didAppear = false
+    
     var body: some View {
         ZStack {
             LightBackground()
@@ -19,8 +23,28 @@ struct VictoryView: View {
 
                 HStack(spacing: 32) {
                     CharacterImage(imageName: "happyHedge")
+                        .offset(y: jumpUpHedge ? -5 : 5)
+                        .onChange(of: didAppear) { _ in
+                            withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
+                                self.jumpUpHedge.toggle()
+                            }
+                        }
+                        .onAppear {
+                            didAppear = true
+                        }
+
                     VictoryBalloon()
+
                     CharacterImage(imageName: "superHappyOtter")
+                        .offset(y: jumpUpOtter ? -5 : 5)
+                        .onChange(of: didAppear) { _ in
+                            withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
+                                self.jumpUpOtter.toggle()
+                            }
+                        }
+                        .onAppear {
+                            didAppear = true
+                        }
                 }
 
                 TextBoxView()
@@ -55,6 +79,10 @@ struct VictoryView: View {
 // MARK: - DefeatView
 
 struct DefeatView: View {
+    @State private var shake = false
+    @State private var jumpUp = false
+    @State private var didAppear = false
+    
     var body: some View {
         ZStack {
             LightBackground()
@@ -64,8 +92,28 @@ struct DefeatView: View {
 
                 HStack(spacing: 32) {
                     CharacterImage(imageName: "sadHedge")
+                        .rotationEffect(Angle(degrees: shake ? -2 : 2))
+                        .onChange(of: didAppear) { _ in
+                            withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
+                                self.shake.toggle()
+                            }
+                        }
+                        .onAppear {
+                            didAppear = true
+                        }
+                    
                     DefeatBalloon()
+                    
                     CharacterImage(imageName: "hiOtter")
+                        .offset(y: jumpUp ? -5 : 5)
+                        .onChange(of: didAppear) { _ in
+                            withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
+                                self.jumpUp.toggle()
+                            }
+                        }
+                        .onAppear {
+                            didAppear = true
+                        }
                 }
 
                 TextBoxView()

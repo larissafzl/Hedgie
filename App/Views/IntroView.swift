@@ -60,14 +60,37 @@ struct SecondIntroPart: View {
 
 struct SecondContentView: View {
     @Binding var currentIndex: Int
+    @State private var shake = false
+    @State private var jumpUp = false
+    @State private var didAppear = false
 
     var body: some View {
         VStack(spacing: 32) {
             Spacer()
             HStack(spacing: 32) {
                 CharacterImage(imageName: "shockedHedge")
+                    .rotationEffect(Angle(degrees: shake ? -2 : 2))
+                    .onChange(of: didAppear) { _ in
+                        withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
+                            self.shake.toggle()
+                        }
+                    }
+                    .onAppear {
+                        didAppear = true
+                    }
+                
                 BattleBalloon()
+                
                 CharacterImage(imageName: "hiOtter")
+                    .offset(y: jumpUp ? -5 : 5)
+                    .onChange(of: didAppear) { _ in
+                        withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
+                            self.jumpUp.toggle()
+                        }
+                    }
+                    .onAppear {
+                        didAppear = true
+                    }
             }
             TextBoxIntroView2(currentIndex: $currentIndex)
             Spacer()
@@ -90,9 +113,9 @@ struct HedgiesIntro: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 300, height: 300)
-                .rotationEffect(Angle(degrees: shake ? 0 : 0))
+                .rotationEffect(Angle(degrees: shake ? -0 : 0))
                 .onAppear() {
-                    withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
+                    withAnimation(Animation.easeInOut(duration: 0.08).repeatForever(autoreverses: true)) {
                         self.shake.toggle()
                     }
                     

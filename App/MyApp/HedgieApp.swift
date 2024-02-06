@@ -12,16 +12,13 @@ struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                BattleView()
-//                InitialMenu(currentIndex: $currentIndex)
-//                    .onAppear {
-//                        // Print initial value when the view appears
-//                        print("Initial Index: \(currentIndex)")
-//                    }
-//                    .onChange(of: currentIndex) { newIndex in
-//                        // Print whenever currentIndex changes
-//                        print("Current Index: \(newIndex)")
-//                    }
+                InitialMenu(currentIndex: $currentIndex)
+                    .onAppear {
+                        print("Initial Index: \(currentIndex)")
+                    }
+                    .onChange(of: currentIndex) { newIndex in
+                        print("Current Index: \(newIndex)")
+                    }
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)
