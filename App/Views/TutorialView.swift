@@ -67,7 +67,80 @@ struct TutorialArrow: View {
     }
 }
 
-struct Balloons: View {
+struct BalloonsRed: View {
+    var body: some View {
+        HStack(spacing: 32) {
+            Image("balloonRight")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 195, height: 110)
+                .overlay(
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Otty")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        HStack(spacing: 16) {
+                            Text("Quality Time")
+                            Text("0/50")
+                        }
+                        .font(Font.custom("GillSans", size: 14))
+                        
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color(.systemGray6))
+                                .frame(width: 130, height: 10)
+                            
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("red"))
+                                .frame(width: 0, height: 10)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 23)
+                    .padding(.trailing, 24)
+                )
+            
+            Image(systemName: "arrow.right")
+                .foregroundColor(.white)
+                .scaleEffect(x: 1.5, y: 1.5)
+
+            
+            Image("balloonRight")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 195, height: 110)
+                .overlay(
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Otty")
+                            .font(Font.custom("GillSans", size: 20)).italic()
+                        
+                        HStack(spacing: 16) {
+                            Text("Quality Time")
+                            Text("40/50")
+                        }
+                        .font(Font.custom("GillSans", size: 14))
+                        
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color(.systemGray6))
+                                .frame(width: 130, height: 10)
+                            
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("red"))
+                                .frame(width: 107, height: 10)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 23)
+                    .padding(.trailing, 24)
+                )
+        }
+    }
+}
+
+struct BalloonsBlue: View {
     var body: some View {
         HStack(spacing: 32) {
             Image("balloonLeft")
@@ -85,42 +158,56 @@ struct Balloons: View {
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
-                        ProgressView(value: 1)
-                            .frame(width: 135)
-                            .tint(Color("blue"))
-                            .scaleEffect(x: 1, y: 2, anchor: .center)
-                            .padding(.top, 3)
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color(.systemGray6))
+                                .frame(width: 130, height: 10)
+                            
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("blue"))
+                                .frame(width: 130, height: 10)
+                        }
                         
                         Spacer()
                     }
                     .padding(.top, 23)
+                    .padding(.trailing, 10)
                 )
             
-            Image("balloonRight")
+            Image(systemName: "arrow.right")
+                .foregroundColor(.white)
+                .scaleEffect(x: 1.5, y: 1.5)
+
+            
+            Image("balloonLeft")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 195, height: 110)
                 .overlay(
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Otty")
+                        Text("Hedgie")
                             .font(Font.custom("GillSans", size: 20)).italic()
                         
                         HStack(spacing: 16) {
-                            Text("Quality Time")
-                            Text("15/50")
+                            Text("Social Energy")
+                            Text("10/35")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
-                        ProgressView(value: 0.3)
-                            .frame(width: 135)
-                            .tint(Color("red"))
-                            .scaleEffect(x: 1, y: 2, anchor: .center)
-                            .padding(.top, 3)
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color(.systemGray6))
+                                .frame(width: 130, height: 10)
+                            
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("blue"))
+                                .frame(width: 37, height: 10)
+                        }
                         
                         Spacer()
                     }
-                    .padding(.trailing, 20)
                     .padding(.top, 23)
+                    .padding(.trailing, 10)
                 )
         }
     }
@@ -140,7 +227,7 @@ struct RedSkills: View {
                 }
                 HStack {
                     Text("opponent's")
-                    Text("Quality Time").italic().foregroundColor(Color("red"))
+                    Text("Quality Time.").italic().foregroundColor(Color("red"))
                 }
             }
             .foregroundColor(.white)
@@ -193,7 +280,7 @@ struct BlueSkills: View {
                 }
                 HStack {
                     Text("Hedgie's").italic()
-                    Text("Social Energy").italic().foregroundColor(Color("blue"))
+                    Text("Social Energy.").italic().foregroundColor(Color("blue"))
                 }
             }
             .foregroundColor(.white)
@@ -235,7 +322,7 @@ struct BlueSkills: View {
 struct SkillCooldown: View {
     var body: some View {
         VStack(spacing: 40) {
-            Text("Each skill has its own recharge time. Use them wisely")
+            Text("Each skill has its own recharge time. Use them wisely.")
                 .foregroundColor(.white)
                 .font(Font.custom("GillSans", size: 20))
             
@@ -311,19 +398,40 @@ struct TutorialView1Text: View {
         VStack {
             HStack {
                 Text("Help")
-                
                 Text("Hedgie's").italic()
-                
-                Text("socialization by preserving his")
-                
-                Text("Social Energy").italic().foregroundColor(Color("blue"))
+                Text("socialization by")
+                Text("increasing").italic().foregroundColor(Color("red"))
+                Text("the opponent's ")
             }
             
             HStack {
+                Text("Quality Time.").italic().foregroundColor(Color("red"))
+                Text("You")
+                Text("win").italic().bold()
+                Text("when it is maximized.")
+            }
+        }
+        .font(Font.custom("GillSans", size: 20))
+        .foregroundColor(.white)
+        .padding(.horizontal, 32)
+    }
+}
 
-                Text("and increasing the opponent's")
-
-                Text("Quality Time").italic().foregroundColor(Color("red"))
+struct TutorialView2Text: View {
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Be sure to")
+                Text("preserve").italic().foregroundColor(Color("blue"))
+                Text("Hedgie's").italic()
+                Text("Social Energy.").italic().foregroundColor(Color("blue"))
+                Text("")
+            }
+            
+            HStack {
+                Text("You")
+                Text("lose").italic().bold()
+                Text("if it reaches zero.")
             }
         }
         .font(Font.custom("GillSans", size: 20))
@@ -355,13 +463,13 @@ struct TutorialView1: View {
                             
                             TutorialView1Text()
                             
-                            Balloons()
+                            BalloonsRed()
                             
                             Spacer()
                         }
                     )
                     .overlay(
-                        TutorialIndex(currentIndex: "1/3")
+                        TutorialIndex(currentIndex: "1/4")
                     )
                     .overlay(
                         NavigationLink(destination: {
@@ -376,6 +484,49 @@ struct TutorialView1: View {
 }
 
 struct TutorialView2: View {
+    @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
+    
+    init() {
+        UINavigationBar.setAnimationsEnabled(false)
+    }
+    
+    var body: some View {
+        ZStack {
+            BattleView()
+            
+            ZStack {
+                BlackBackground()
+                
+                BrownRectangle()
+                    .overlay(
+                        VStack(spacing: 16) {
+                            Spacer()
+                            
+                            TutorialViewTitle(titleCalled: "yourSocialEnergy")
+                            
+                            TutorialView2Text()
+                            
+                            BalloonsBlue()
+                            
+                            Spacer()
+                        }
+                    )
+                    .overlay(
+                        TutorialIndex(currentIndex: "2/4")
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            TutorialView3()
+                        }, label: {
+                            TutorialArrow()
+                        })
+                    )
+            }
+        }
+    }
+}
+
+struct TutorialView3: View {
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
@@ -404,11 +555,11 @@ struct TutorialView2: View {
                         }
                     )
                     .overlay(
-                        TutorialIndex(currentIndex: "2/3")
+                        TutorialIndex(currentIndex: "3/4")
                     )
                     .overlay(
                         NavigationLink(destination: {
-                            TutorialView3()
+                            TutorialView4()
                         }, label: {
                             TutorialArrow()
                         })
@@ -419,7 +570,7 @@ struct TutorialView2: View {
     }
 }
 
-struct TutorialView3: View {
+struct TutorialView4: View {
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
@@ -445,7 +596,7 @@ struct TutorialView3: View {
                         }
                     )
                     .overlay(
-                        TutorialIndex(currentIndex: "3/3")
+                        TutorialIndex(currentIndex: "4/4")
                     )
                     .overlay(
                         NavigationLink(destination: {
