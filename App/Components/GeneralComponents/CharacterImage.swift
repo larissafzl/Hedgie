@@ -47,7 +47,7 @@ struct CharacterImageSmall: View {
                     withAnimation(Animation.easeInOut(duration: 0.05).repeatForever(autoreverses: true)) {
                         self.shake.toggle()
                     }
-                } else if imageName == "happyOtter" {
+                } else if imageName == "happyOtter" || imageName == "happyHedge" {
                     withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
                         self.jumpUp.toggle()
                     }

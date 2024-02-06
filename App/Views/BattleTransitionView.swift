@@ -21,10 +21,16 @@ struct BattleHedgie: View {
         ZStack {
             DarkBackground()
             TurnBoxHedgie()
-            HedgieBattleImage(imageName: "hedge")
-            EnemyBattleImage(imageName: "happyOtter")
+            if copiedActiveButton?.type == .offensive { // Remove the $ symbol here
+                HedgieBattleImage(imageName: "hedge")
+                EnemyBattleImage(imageName: "happyOtter")
+            } else {
+                HedgieBattleImage(imageName: "happyHedge")
+                EnemyBattleImage(imageName: "otter")
+            }
             TextBoxBattleHedgie(activeButton: $copiedActiveButton)
         }
+
         .navigationBarBackButtonHidden(true)
         .onAppear {
             disableNavigationBarAnimations()
@@ -39,7 +45,7 @@ struct BattleHedgie: View {
     }
 
     private func handleTimedActions() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             handleNextViewNavigation()
         }
 
@@ -51,13 +57,15 @@ struct BattleHedgie: View {
     private func handleNextViewNavigation() {
         if characterDataViewModel.otty.currentLife == characterDataViewModel.otty.totalLife {
             goToVictoryView = true
+            return
         }
         goToNextView = true
     }
 
+
     private func handleConfirmation() {
         if let activeButton = activeButton {
-            print("Button clicked for \(activeButton.skillName)")
+            print("Button clicked for \(activeButton.skillName), Type: \(activeButton.type)")
             skillDataViewModel.confirmedSkills[activeButton] = true
 
             if activeButton.type == .offensive {
@@ -71,6 +79,7 @@ struct BattleHedgie: View {
             printConfirmedSkills()
         }
     }
+
 
     private func updateCharacterLife(_ character: CharacterData) {
         if let activeButton = activeButton, character.currentLife + activeButton.strength <= character.totalLife {
@@ -145,7 +154,7 @@ struct BattleEnemy: View {
     }
 
     private func navigateToNextView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             if characterDataViewModel.hedgie.currentLife == 0 {
                 goToDefeatView = true
             }
