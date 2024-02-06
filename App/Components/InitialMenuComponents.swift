@@ -21,6 +21,7 @@ struct InitialMenuComponents: View {
             AboutButton()
                 .padding(.top, -20)
         }
+        .padding(.bottom)
     }
 }
 
