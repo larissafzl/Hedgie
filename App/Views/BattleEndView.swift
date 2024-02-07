@@ -187,6 +187,11 @@ struct FirstEndView: View {
 }
 
 struct SecondEndView: View {
+    
+    init() {
+        UINavigationBar.setAnimationsEnabled(false)
+    }
+    
     var body: some View {
         ZStack {
             LightBackground()
@@ -199,6 +204,13 @@ struct SecondEndView: View {
                     .overlay(
                         Text("He will keep on trying until it gets better.")
                             .font(Font.custom("GillSans", size: 20))
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            EndView1()
+                        }, label: {
+                            ArrowButtonView()
+                        })
                     )
                 
                 Spacer()

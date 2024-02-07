@@ -12,7 +12,7 @@ struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                TutorialView1()
+                SecondEndView()
 //                InitialMenu(currentIndex: $currentIndex)
 //                    .onAppear {
 //                        print("Initial Index: \(currentIndex)")
