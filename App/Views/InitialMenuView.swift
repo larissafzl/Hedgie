@@ -23,5 +23,18 @@ struct InitialMenu: View {
             
             CharactersImage()
         }
+        .onAppear {
+            playGameSound(volume: 1.5)
+        }
+    }
+    
+    func playGameSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .gameSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
+        }
     }
 }

@@ -34,7 +34,10 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "App",
-            path: "App"
+            path: "App",
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )
