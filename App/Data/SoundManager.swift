@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import SwiftUI
 import AVFAudio
 
 class SoundManager {
     static let instance = SoundManager()
     
-    var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
     
     enum SoundOption: String {
         case gameSoundtrack
+        case lightningSoundtrack
         case battleSoundtrack
         case endingSoundtrack
     }
@@ -37,9 +37,17 @@ class SoundManager {
             completion?(error)
         }
     }
-
+    
+    func stopCurrentSound() {
+        player?.stop()
+    }
+    
+    func currentSoundIs(_ sound: SoundOption) -> Bool {
+        return player?.url?.lastPathComponent == "\(sound.rawValue).mp3"
+    }
 
 }
+
 
 class EffectManager {
     static let instance = EffectManager()

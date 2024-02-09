@@ -15,7 +15,7 @@ class IntroState: ObservableObject {
 
 struct FirstIntroPart: View {
     @Binding var currentIndex: Int
-    
+
     init(currentIndex: Binding<Int>) {
         _currentIndex = currentIndex
         UINavigationBar.setAnimationsEnabled(false)
@@ -27,8 +27,28 @@ struct FirstIntroPart: View {
             ContentView(currentIndex: $currentIndex)
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            // Check if the current sound is lightningSoundtrack
+            if SoundManager.instance.currentSoundIs(.lightningSoundtrack) {
+                // If the current sound is lightningSoundtrack, stop it and play the gameSoundtrack
+                SoundManager.instance.stopCurrentSound()
+                playGameSound(volume: 1)
+            }
+        }
+    }
+
+    func playGameSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .gameSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
+        }
     }
 }
+
+
 
 
 struct ContentView: View {
@@ -90,13 +110,26 @@ struct SecondContentView: View {
                     }
                     .onAppear {
                         didAppear = true
+                        SoundManager.instance.stopCurrentSound()
+                        playBattleSound(volume: 0.5)
                     }
             }
             TextBoxIntroView2(currentIndex: $currentIndex)
             Spacer()
         }
     }
+    
+    func playBattleSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .battleSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
+        }
+    }
 }
+
 
 // MARK: - HedgiesIntro
 
@@ -104,11 +137,11 @@ struct HedgiesIntro: View {
     @Binding var currentIndex: Int
     @State private var isActive: Bool = false
     @State private var shake = false
-    
+
     var body: some View {
         ZStack {
             RainyBackground()
-            
+
             Image("shockedHedge")
                 .resizable()
                 .scaledToFit()
@@ -119,11 +152,13 @@ struct HedgiesIntro: View {
                         self.shake.toggle()
                     }
                     
+                    // Play the lightning sound as soon as the view appears
+                    playLightningSound(volume: 1)
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         currentIndex = (currentIndex + 1) % content.count
                         isActive = true
                     }
-                    
                 }
                 .navigationBarBackButtonHidden(true)
                 .background(
@@ -133,8 +168,18 @@ struct HedgiesIntro: View {
                     ) {
                         EmptyView()
                     }
-                        .hidden()
+                    .hidden()
                 )
+        }
+    }
+
+    func playLightningSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .lightningSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
         }
     }
 }

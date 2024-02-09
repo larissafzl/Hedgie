@@ -24,7 +24,7 @@ struct InitialMenu: View {
             CharactersImage()
         }
         .onAppear {
-            playGameSound(volume: 1.5)
+            playGameSound(volume: 1)
         }
     }
     

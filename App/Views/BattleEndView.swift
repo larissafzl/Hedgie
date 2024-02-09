@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-// MARK: - VictoryView
+// MARK: VictoryView
 
 struct VictoryView: View {
     @State private var jumpUpHedge = false
     @State private var jumpUpOtter = false
     @State private var didAppear = false
-    
+
     var body: some View {
         ZStack {
             LightBackground()
@@ -73,16 +73,30 @@ struct VictoryView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            SoundManager.instance.stopCurrentSound()
+            playEndingSound(volume: 0.6)
+        }
+    }
+
+    func playEndingSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .endingSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
+        }
     }
 }
 
-// MARK: - DefeatView
+// MARK: DefeatView
 
 struct DefeatView: View {
     @State private var shake = false
     @State private var jumpUp = false
     @State private var didAppear = false
-    
+
     var body: some View {
         ZStack {
             LightBackground()
@@ -143,8 +157,23 @@ struct DefeatView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            SoundManager.instance.stopCurrentSound()
+            playEndingSound(volume: 0.6)
+        }
+    }
+
+    func playEndingSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .endingSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
+        }
     }
 }
+
 
 // MARK: - EndView
 
