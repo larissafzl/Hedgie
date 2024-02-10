@@ -13,6 +13,7 @@ struct VictoryView: View {
     @State private var jumpUpHedge = false
     @State private var jumpUpOtter = false
     @State private var didAppear = false
+    @State private var playInterfaceSound = false
 
     var body: some View {
         ZStack {
@@ -67,6 +68,9 @@ struct VictoryView: View {
                         }, label: {
                             ArrowButtonView()
                         })
+                        .simultaneousGesture(TapGesture().onEnded {
+                            playInterfaceSound = true
+                        })
                     )
 
                 Spacer()
@@ -77,6 +81,12 @@ struct VictoryView: View {
             SoundManager.instance.stopCurrentSound()
             playEndingSound(volume: 0.6)
             EffectManager.instance.playSound(sound: .victoryEffect, volume: 0.8)
+        }
+        .onChange(of: playInterfaceSound) { newValue in
+            if newValue {
+                playRightInterfaceEffect()
+                playInterfaceSound = false
+            }
         }
     }
 
@@ -89,6 +99,10 @@ struct VictoryView: View {
             }
         }
     }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
+    }
 }
 
 
@@ -98,6 +112,7 @@ struct DefeatView: View {
     @State private var shake = false
     @State private var jumpUp = false
     @State private var didAppear = false
+    @State private var playInterfaceSound = false
 
     var body: some View {
         ZStack {
@@ -153,6 +168,9 @@ struct DefeatView: View {
                         }, label: {
                             ArrowButtonView()
                         })
+                        .simultaneousGesture(TapGesture().onEnded {
+                            playInterfaceSound = true
+                        })
                     )
 
                 Spacer()
@@ -163,6 +181,12 @@ struct DefeatView: View {
             SoundManager.instance.stopCurrentSound()
             playEndingSound(volume: 0.6)
             EffectManager.instance.playSound(sound: .defeatEffect, volume: 0.3)
+        }
+        .onChange(of: playInterfaceSound) { newValue in
+            if newValue {
+                playRightInterfaceEffect()
+                playInterfaceSound = false
+            }
         }
     }
 
@@ -175,7 +199,13 @@ struct DefeatView: View {
             }
         }
     }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
+    }
 }
+
+
 
 
 
@@ -216,8 +246,16 @@ struct FirstEndView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
+
 
 struct SecondEndView: View {
     
@@ -250,5 +288,12 @@ struct SecondEndView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }

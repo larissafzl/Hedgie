@@ -16,14 +16,24 @@ struct InitialMenuComponents: View {
         VStack {
             GameTitle()
                 .padding(.bottom, -60)
-            StartButtonLink(currentIndex: $currentIndex)
-                .padding(.top, -10)
+            NavigationLink(destination: FirstIntroPart(currentIndex: $currentIndex)) {
+                StartButton()
+            }
+            .padding(.top, -10)
+            .simultaneousGesture(TapGesture().onEnded {
+                playRightInterfaceEffect()
+            })
             AboutButton()
                 .padding(.top, -20)
         }
         .padding(.bottom)
     }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
+    }
 }
+
 
 // MARK: - GameTitle View
 
@@ -34,20 +44,6 @@ struct GameTitle: View {
             .scaledToFill()
             .frame(width: 540, height: 300)
             .padding(.bottom, 40)
-    }
-}
-
-// MARK: - StartButtonLink View
-
-struct StartButtonLink: View {
-    @Binding var currentIndex: Int
-    
-    var body: some View {
-        NavigationLink {
-            FirstIntroPart(currentIndex: $currentIndex)
-        } label: {
-            StartButton()
-        }
     }
 }
 

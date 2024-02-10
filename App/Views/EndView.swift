@@ -88,8 +88,16 @@ struct EndView1: View {
                 )
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
+
 
 struct EndView2: View {
     var body: some View {
@@ -125,5 +133,12 @@ struct EndView2: View {
                 )
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }

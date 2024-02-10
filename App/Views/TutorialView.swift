@@ -480,8 +480,16 @@ struct TutorialView1: View {
                     )
             }
         }
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
+
 
 struct TutorialView2: View {
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
@@ -523,8 +531,16 @@ struct TutorialView2: View {
                     )
             }
         }
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
+
 
 struct TutorialView3: View {
     
@@ -567,8 +583,16 @@ struct TutorialView3: View {
             }
             .navigationBarBackButtonHidden(true)
         }
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
+
 
 struct TutorialView4: View {
     
@@ -608,5 +632,12 @@ struct TutorialView4: View {
             }
             .navigationBarBackButtonHidden(true)
         }
+        .onAppear {
+            playRightInterfaceEffect()
+        }
+    }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }

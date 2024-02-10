@@ -67,11 +67,12 @@ struct SkillButton: View {
     @ObservedObject var skill: SkillData
     @Binding var activeButton: SkillData?
     @EnvironmentObject var skillDataViewModel: SkillDataViewModel
-
+    
     var body: some View {
         buttonContent
             .onTapGesture {
                 activeButton = (activeButton == skill) ? nil : skill
+                playInterfaceEffect() // Call the function to play the interface sound
             }
             .disabled(skillDataViewModel.confirmedSkills[skill] == true)
     }
@@ -90,6 +91,10 @@ struct SkillButton: View {
     private var buttonOverlay: some View {
         RoundedRectangle(cornerRadius: 30)
             .stroke(activeButton == skill ? Color.black.opacity(0.5) : Color.clear, lineWidth: 1)
+    }
+    
+    private func playInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
 
@@ -165,9 +170,7 @@ struct ConfirmButton: View {
     }
     
     private var confirmButton: some View {
-        NavigationLink {
-            BattleHedgie(activeButton: $activeButton)
-        } label: {
+        NavigationLink(destination: BattleHedgie(activeButton: $activeButton)) {
             RoundedRectangle(cornerRadius: 30)
                 .foregroundColor(Color("brown"))
                 .frame(width: 110, height: 40)
@@ -182,8 +185,16 @@ struct ConfirmButton: View {
                 .foregroundColor(activeButton == nil ? Color.black.opacity(0.5) : Color.clear)
         )
         .disabled(activeButton == nil)
+        .simultaneousGesture(TapGesture().onEnded {
+            playRightInterfaceEffect()
+        })
+    }
+
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
+
 
 // MARK: - Hotbar View
 

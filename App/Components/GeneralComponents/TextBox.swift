@@ -56,6 +56,9 @@ struct TextBoxIntroView2: View {
                 NavigationLink(destination: TutorialView1()) {
                     ArrowButtonView()
                 }
+//                .onAppear {
+//                    playRightInterfaceEffect()
+//                }
             )
         
             .overlay(
@@ -76,7 +79,12 @@ struct TextBoxIntroView2: View {
                 }
             )
     }
+    
+    func playRightInterfaceEffect() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
+    }
 }
+
 
 struct TextBoxBattleHedgie: View {
     @Binding var activeButton: SkillData?
