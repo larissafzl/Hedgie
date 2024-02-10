@@ -70,8 +70,10 @@ struct BattleHedgie: View {
 
             if activeButton.type == .offensive {
                 updateCharacterLife(characterDataViewModel.otty)
+                EffectManager.instance.playSound(sound: .hedgieAttack)
             } else {
                 updateCharacterLife(characterDataViewModel.hedgie)
+                EffectManager.instance.playSound(sound: .hedgieDefense, volume: 0.2)
             }
 
             self.activeButton = nil
@@ -79,7 +81,6 @@ struct BattleHedgie: View {
             printConfirmedSkills()
         }
     }
-
 
     private func updateCharacterLife(_ character: CharacterData) {
         if let activeButton = activeButton, character.currentLife + activeButton.strength <= character.totalLife {
@@ -149,9 +150,11 @@ struct BattleEnemy: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if let skill = randomSkill {
                 self.updateCharacterLife(for: characterDataViewModel.hedgie, with: skill.strength)
+                EffectManager.instance.playSound(sound: .enemyAttack)
             }
         }
     }
+
 
     private func navigateToNextView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {

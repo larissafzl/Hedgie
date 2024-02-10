@@ -12,13 +12,14 @@ struct HedgieApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                InitialMenu(initialIndex: currentIndex)
-                    .onAppear {
-                        print("Initial Index: \(currentIndex)")
-                    }
-                    .onChange(of: currentIndex) { newIndex in
-                        print("Current Index: \(newIndex)")
-                    }
+                SecondIntroPart(currentIndex: $currentIndex)
+//                InitialMenu(initialIndex: currentIndex)
+//                    .onAppear {
+//                        print("Initial Index: \(currentIndex)")
+//                    }
+//                    .onChange(of: currentIndex) { newIndex in
+//                        print("Current Index: \(newIndex)")
+//                    }
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)
