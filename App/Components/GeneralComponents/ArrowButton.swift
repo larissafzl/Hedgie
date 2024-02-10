@@ -37,7 +37,7 @@ struct ArrowButtonIntroView1: View {
     var body: some View {
         // Check if the current index is at the last content item
         if currentIndex == content.count - 1 {
-            NavigationLink(destination: SecondIntroPart(currentIndex: $currentIndex)) {
+            NavigationLink(destination: EnemysIntro(currentIndex: $currentIndex)) {
                 ArrowButtonView()
             }
         } else if currentIndex == 1 {

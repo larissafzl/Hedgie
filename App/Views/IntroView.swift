@@ -110,7 +110,6 @@ struct SecondContentView: View {
                     }
                     .onAppear {
                         didAppear = true
-                        SoundManager.instance.stopCurrentSound()
                         playBattleSound(volume: 0.5)
                     }
             }
@@ -152,8 +151,7 @@ struct HedgiesIntro: View {
                         self.shake.toggle()
                     }
                     
-                    // Play the lightning sound as soon as the view appears
-                    playLightningSound(volume: 1)
+                    playLightningSound(volume: 0.8)
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         currentIndex = (currentIndex + 1) % content.count
@@ -173,6 +171,73 @@ struct HedgiesIntro: View {
         }
     }
 
+    func playLightningSound(volume: Float) {
+        SoundManager.instance.playSound(sound: .lightningSoundtrack, volume: volume) { error in
+            if let error = error {
+                print("Error playing sound: \(error.localizedDescription)")
+            } else {
+                print("Sound played successfully")
+            }
+        }
+    }
+}
+
+struct EnemysIntro: View {
+    @Binding var currentIndex: Int
+    @State private var isActive: Bool = false
+    @State private var jumpUp = false
+    @State private var didAppear = false
+    
+    var body: some View {
+        ZStack {
+            RainyBackground()
+            
+            VStack(spacing: 32) {
+                Spacer()
+                
+                Image("hiOtter")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 210, height: 195)
+                    .offset(y: jumpUp ? -5 : 5)
+                    .onChange(of: didAppear) { _ in                        withAnimation(Animation.easeInOut(duration: 0.1).repeatForever(autoreverses: true)) {
+                            self.jumpUp.toggle()
+                            
+                            playLightningSound(volume: 0.8)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                currentIndex = (currentIndex + 1) % content.count
+                                isActive = true
+                            }
+                        }
+                    }
+                    .onAppear {
+                        didAppear = true
+                    }
+                
+                TextBoxView()
+                    .overlay(
+                        HStack {
+                            Text("Otty, the friendly friend").italic()
+                            Text("has appeared!")
+                        }
+                        .font(Font.custom("GillSans", size: 20))
+                    )
+                Spacer()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .background(
+            NavigationLink(
+                destination: SecondIntroPart(currentIndex: $currentIndex),
+                isActive: $isActive
+            ) {
+                EmptyView()
+            }
+            .hidden()
+        )
+    }
+    
     func playLightningSound(volume: Float) {
         SoundManager.instance.playSound(sound: .lightningSoundtrack, volume: volume) { error in
             if let error = error {

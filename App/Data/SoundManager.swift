@@ -55,6 +55,7 @@ class EffectManager {
     var player: AVAudioPlayer?
     
     enum SoundOption: String {
+        case lightningSoundtrack
         case rightInterfaceEffect
         case hedgieAttack
         case hedgieDefense

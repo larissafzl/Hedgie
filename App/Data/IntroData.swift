@@ -50,10 +50,10 @@ let content: [IntroContent] = [
     IntroContent(imageName: "hedge", textContent: [
         IntroContent.TextPart(text: "Hedgie ", fontName: "GillSans-Italic", isItalic: true),
         IntroContent.TextPart(text: "knows he's not alone in this, but... Oops, it seems like someone is coming.", fontName: "GillSans", isItalic: false)
-    ]),
-    
-    IntroContent(imageName: "hiOtter", textContent: [
-        IntroContent.TextPart(text: "Otty, the friendly friend", fontName: "GillSans-Italic", isItalic: true),
-        IntroContent.TextPart(text: " has appeared!", fontName: "GillSans", isItalic: false)
     ])
+//    
+//    IntroContent(imageName: "hiOtter", textContent: [
+//        IntroContent.TextPart(text: "Otty, the friendly friend", fontName: "GillSans-Italic", isItalic: true),
+//        IntroContent.TextPart(text: " has appeared!", fontName: "GillSans", isItalic: false)
+//    ])
 ]
