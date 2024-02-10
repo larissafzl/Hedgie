@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InitialMenu: View {
     @EnvironmentObject var characterDataViewModel: CharacterDataViewModel
+    @EnvironmentObject var skillDataViewModel: SkillDataViewModel
     @State private var currentIndex: Int
 
     init(initialIndex: Int) {
@@ -26,6 +27,7 @@ struct InitialMenu: View {
         }
         .onAppear {
             characterDataViewModel.resetCharacterData()
+            skillDataViewModel.resetSkillsData()
             playGameSound(volume: 1)
         }
         .navigationBarBackButtonHidden(true)

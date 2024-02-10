@@ -85,6 +85,14 @@ class SkillDataViewModel: ObservableObject {
         }
     }
 
+    func resetSkillsData() {
+        self.skillOne = SkillData(skillName: "Just Smile", description: "Quality Time", type: .offensive, strength: 15.0, cooldown: 1, remainingCooldown: 2)
+        self.skillTwo = SkillData(skillName: "Ask a Question", description: "Quality Time", type: .offensive, strength: 25.0, cooldown: 2, remainingCooldown: 3)
+        self.skillThree = SkillData(skillName: "Stay Silent", description: "Social Energy", type: .defensive, strength: 5, cooldown: 2, remainingCooldown: 3)
+        self.skillFour = SkillData(skillName: "Nod Head", description: "Social Energy", type: .defensive, strength: 15.0, cooldown: 3, remainingCooldown: 4)
+        self.confirmedSkills = [:]
+    }
+
     init() {
         self.skillOne = SkillData(skillName: "Just Smile", description: "Quality Time", type: .offensive, strength: 15.0, cooldown: 1, remainingCooldown: 2)
         self.skillTwo = SkillData(skillName: "Ask a Question", description: "Quality Time", type: .offensive, strength: 25.0, cooldown: 2, remainingCooldown: 3)
@@ -92,6 +100,7 @@ class SkillDataViewModel: ObservableObject {
         self.skillFour = SkillData(skillName: "Nod Head", description: "Social Energy", type: .defensive, strength: 15.0, cooldown: 3, remainingCooldown: 4)
     }
 }
+
 
 // MARK: - OttySkillData Class
 
