@@ -110,7 +110,7 @@ struct SecondContentView: View {
                     }
                     .onAppear {
                         didAppear = true
-                        playBattleSound(volume: 0.5)
+                        playBattleSound(volume: 0.5, numberOfLoops: -1)
                     }
             }
             TextBoxIntroView2(currentIndex: $currentIndex)
@@ -118,8 +118,8 @@ struct SecondContentView: View {
         }
     }
     
-    func playBattleSound(volume: Float) {
-        SoundManager.instance.playSound(sound: .battleSoundtrack, volume: volume) { error in
+    func playBattleSound(volume: Float, numberOfLoops: Int) {
+        SoundManager.instance.playSound(sound: .battleSoundtrack, volume: volume, numberOfLoops: numberOfLoops) { error in
             if let error = error {
                 print("Error playing sound: \(error.localizedDescription)")
             } else {

@@ -28,13 +28,13 @@ struct InitialMenu: View {
         .onAppear {
             characterDataViewModel.resetCharacterData()
             skillDataViewModel.resetSkillsData()
-            playGameSound(volume: 1)
+            playGameSound(volume: 1, numberOfLoops: -1)
         }
         .navigationBarBackButtonHidden(true)
     }
 
-    func playGameSound(volume: Float) {
-        SoundManager.instance.playSound(sound: .gameSoundtrack, volume: volume) { error in
+    func playGameSound(volume: Float, numberOfLoops: Int) {
+        SoundManager.instance.playSound(sound: .gameSoundtrack, volume: volume, numberOfLoops: numberOfLoops) { error in
             if let error = error {
                 print("Error playing sound: \(error.localizedDescription)")
             } else {

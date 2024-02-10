@@ -79,7 +79,7 @@ struct VictoryView: View {
         .navigationBarBackButtonHidden(true)
         .onAppear {
             SoundManager.instance.stopCurrentSound()
-            playEndingSound(volume: 0.6)
+            playEndingSound(volume: 0.6, numberOfLoops: -1)
             EffectManager.instance.playSound(sound: .victoryEffect, volume: 0.8)
         }
         .onChange(of: playInterfaceSound) { newValue in
@@ -90,8 +90,8 @@ struct VictoryView: View {
         }
     }
 
-    func playEndingSound(volume: Float) {
-        SoundManager.instance.playSound(sound: .endingSoundtrack, volume: volume) { error in
+    func playEndingSound(volume: Float, numberOfLoops: Int) {
+        SoundManager.instance.playSound(sound: .endingSoundtrack, volume: volume, numberOfLoops: numberOfLoops) { error in
             if let error = error {
                 print("Error playing sound: \(error.localizedDescription)")
             } else {
@@ -278,7 +278,7 @@ struct SecondEndView: View {
                     )
                     .overlay(
                         NavigationLink(destination: {
-                            EndView1()
+                            CreditsView()
                         }, label: {
                             ArrowButtonView()
                         })
