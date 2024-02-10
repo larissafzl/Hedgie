@@ -8,30 +8,44 @@
 import SwiftUI
 
 struct CreditsView: View {
+    @State private var showInitialMenu = false
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
     }
     
     var body: some View {
-        ZStack {
-            InitialMenuBackground()
-        
-            VStack(spacing: -80) {
-                GameTitle()
-                    .padding(.bottom)
-                
-                Image("balloon")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 235, height: 80)
-                    .overlay(
-                        VStack {
-                            Text("Created by").italic()
-                            Text("Larissa Fazolin")
+        Group {
+            if showInitialMenu {
+                InitialMenu(initialIndex: 0)
+            } else {
+                ZStack {
+                    InitialMenuBackground()
+                    
+                    VStack(spacing: -80) {
+                        GameTitle()
+                            .padding(.bottom)
+                        
+                        Image("balloon")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 235, height: 80)
+                            .overlay(
+                                VStack {
+                                    Text("Created by").italic()
+                                    Text("Larissa Fazolin")
+                                }
+                                .font(Font.custom("GillSans", size: 20))
+                            )
+                    }
+                    .onAppear {
+                        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { _ in
+                            withAnimation {
+                                self.showInitialMenu = true
+                            }
                         }
-                            .font(Font.custom("GillSans", size: 20))
-                    )
+                    }
+                }
             }
         }
         .navigationBarBackButtonHidden(true)

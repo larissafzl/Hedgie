@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct InitialMenu: View {
-    @Binding var currentIndex: Int
+    @State private var currentIndex: Int
     
-    init(currentIndex: Binding<Int>) {
-        _currentIndex = currentIndex
+    init(initialIndex: Int) {
+        self._currentIndex = State(initialValue: initialIndex)
         UINavigationBar.setAnimationsEnabled(false)
     }
     
@@ -26,6 +26,7 @@ struct InitialMenu: View {
         .onAppear {
             playGameSound(volume: 1)
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     func playGameSound(volume: Float) {
