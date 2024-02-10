@@ -76,6 +76,7 @@ struct VictoryView: View {
         .onAppear {
             SoundManager.instance.stopCurrentSound()
             playEndingSound(volume: 0.6)
+            EffectManager.instance.playSound(sound: .victoryEffect, volume: 0.8)
         }
     }
 
@@ -89,6 +90,7 @@ struct VictoryView: View {
         }
     }
 }
+
 
 // MARK: DefeatView
 
@@ -160,6 +162,7 @@ struct DefeatView: View {
         .onAppear {
             SoundManager.instance.stopCurrentSound()
             playEndingSound(volume: 0.6)
+            EffectManager.instance.playSound(sound: .defeatEffect, volume: 0.3)
         }
     }
 
@@ -173,6 +176,7 @@ struct DefeatView: View {
         }
     }
 }
+
 
 
 // MARK: - EndView

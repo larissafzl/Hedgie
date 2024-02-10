@@ -63,7 +63,7 @@ class EffectManager {
         case defeatEffect
     }
     
-    func playSound(sound: SoundOption, numberOfLoops: Int = 0) {
+    func playSound(sound: SoundOption, volume: Float = 1.0, numberOfLoops: Int = 0) {
         guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: ".mp3") else {
             print("Sound file not found for \(sound.rawValue)")
             return
@@ -72,9 +72,11 @@ class EffectManager {
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.numberOfLoops = numberOfLoops
+            player?.volume = volume // Set the volume here
             player?.play()
         } catch let error {
             print("Error playing sound for \(sound.rawValue): \(error.localizedDescription)")
         }
     }
+
 }
