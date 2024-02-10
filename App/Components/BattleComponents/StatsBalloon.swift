@@ -47,13 +47,8 @@ struct StatsBalloonRight: View {
 
 // MARK: - HedgieStatsView View
 
-class HedgieStatsViewModel: ObservableObject {
-    @Published var animatedProgressValue: Double = 1.0
-}
-
 struct HedgieStatsView: View {
     @ObservedObject var character: CharacterData
-    @EnvironmentObject var viewModel: HedgieStatsViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -69,11 +64,11 @@ struct HedgieStatsView: View {
                 
                 RoundedRectangle(cornerRadius: 30)
                     .fill(character.lifeType == .socialEnergy ? Color("blue") : Color("red"))
-                    .frame(width: viewModel.animatedProgressValue * 130, height: 10)
+                    .frame(width: character.animatedProgressValue * 130, height: 10)
             }
             .onChange(of: character.currentLife) { _ in
                 withAnimation(.easeInOut(duration: 0.5)) {
-                    viewModel.animatedProgressValue = max(character.currentLife / character.totalLife, 0)
+                    character.animatedProgressValue = max(character.currentLife / character.totalLife, 0)
                 }
             }
             
@@ -86,13 +81,8 @@ struct HedgieStatsView: View {
 
 // MARK: - EnemyStatsViewModel ViewModel
 
-class EnemyStatsViewModel: ObservableObject {
-    @Published var animatedProgressValue: Double = 0.0
-}
-
 struct EnemyStatsView: View {
     @ObservedObject var character: CharacterData
-    @EnvironmentObject var viewModel: EnemyStatsViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -108,11 +98,11 @@ struct EnemyStatsView: View {
                 
                 RoundedRectangle(cornerRadius: 30)
                     .fill(character.lifeType == .socialEnergy ? Color("blue") : Color("red"))
-                    .frame(width: viewModel.animatedProgressValue * 130, height: 10)
+                    .frame(width: character.animatedProgressValue * 130, height: 10)
             }
             .onChange(of: character.currentLife) { _ in
                 withAnimation(.easeInOut(duration: 0.5)) {
-                    viewModel.animatedProgressValue = min(1, max(character.currentLife / character.totalLife, 0))
+                    character.animatedProgressValue = min(1, max(character.currentLife / character.totalLife, 0))
                 }
             }
 

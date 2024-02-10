@@ -6,8 +6,6 @@ struct HedgieApp: App {
     @StateObject private var characterDataViewModel = CharacterDataViewModel()
     @StateObject private var skillDataViewModel = SkillDataViewModel()
     @State private var currentIndex = 0
-    let hedgieStatsViewModel = HedgieStatsViewModel()
-    let enemyStatsViewModel = EnemyStatsViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -22,8 +20,6 @@ struct HedgieApp: App {
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)
-            .environmentObject(hedgieStatsViewModel)
-            .environmentObject(enemyStatsViewModel)
         }
     }
 }
