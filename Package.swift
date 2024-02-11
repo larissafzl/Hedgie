@@ -8,19 +8,19 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Hedgie",
+    name: "The Hedgehogs Dilemma",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Hedgie",
+            name: "The Hedgehogs Dilemma",
             targets: ["App"],
             teamIdentifier: "MR249PWTJZ",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
-            accentColor: .presetColor(.orange),
+            accentColor: .presetColor(.brown),
             supportedDeviceFamilies: [
                 .phone
             ],
