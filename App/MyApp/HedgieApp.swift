@@ -20,6 +20,7 @@ struct HedgieApp: App {
             }
             .environmentObject(characterDataViewModel)
             .environmentObject(skillDataViewModel)
+            .preferredColorScheme(.light)
         }
     }
 }
