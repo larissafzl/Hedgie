@@ -109,11 +109,19 @@ class OttySkillData: ObservableObject {
     @Published var skillTwo: SkillData
     @Published var skillThree: SkillData
     @Published var skillFour: SkillData
+    @Published var skillFive: SkillData
+    @Published var skillSix: SkillData
+    @Published var skillSeven: SkillData
+    @Published var skillEight: SkillData
 
     init() {
         self.skillOne = SkillData(skillName: "Tell a Joke", description: "Social Energy", type: .defensive, strength: 10, cooldown: 1, remainingCooldown: 2)
         self.skillTwo = SkillData(skillName: "Gossip", description: "Social Energy", type: .defensive, strength: 10, cooldown: 2, remainingCooldown: 3)
         self.skillThree = SkillData(skillName: "Vent", description: "Social Energy", type: .defensive, strength: 10, cooldown: 3, remainingCooldown: 4)
         self.skillFour = SkillData(skillName: "Invite You to Hang Out", description: "Social Energy", type: .defensive, strength: 15, cooldown: 2, remainingCooldown: 3)
+        self.skillFive = SkillData(skillName: "Compliment You", description: "Social Energy", type: .defensive, strength: 10, cooldown: 2, remainingCooldown: 3)
+        self.skillSix = SkillData(skillName: "Laugh Out Loud", description: "Social Energy", type: .defensive, strength: 10, cooldown: 2, remainingCooldown: 3)
+        self.skillSeven = SkillData(skillName: "Ask Your Opinion", description: "Social Energy", type: .defensive, strength: 15, cooldown: 2, remainingCooldown: 3)
+        self.skillEight = SkillData(skillName: "Chatter", description: "Social Energy", type: .defensive, strength: 10, cooldown: 2, remainingCooldown: 3)
     }
 }

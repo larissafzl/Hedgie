@@ -142,7 +142,7 @@ struct BattleEnemy: View {
 
     private func setupRandomSkill() {
         let ottySkills = OttySkillData()
-        let skillsArray = [ottySkills.skillOne, ottySkills.skillTwo, ottySkills.skillThree, ottySkills.skillFour]
+        let skillsArray = [ottySkills.skillOne, ottySkills.skillTwo, ottySkills.skillThree, ottySkills.skillFour, ottySkills.skillFive, ottySkills.skillSix, ottySkills.skillSeven, ottySkills.skillEight]
         self.randomSkill = skillsArray.randomElement()
     }
 

@@ -117,7 +117,7 @@ struct BalloonsRed: View {
                         
                         HStack(spacing: 16) {
                             Text("Quality Time")
-                            Text("70/80")
+                            Text("65/80")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
@@ -128,7 +128,7 @@ struct BalloonsRed: View {
                             
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color("red"))
-                                .frame(width: 113.75, height: 10)
+                                .frame(width: 105.625, height: 10)
                         }
                         
                         Spacer()
@@ -190,7 +190,7 @@ struct BalloonsBlue: View {
                         
                         HStack(spacing: 16) {
                             Text("Social Energy")
-                            Text("10/40")
+                            Text("15/40")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
@@ -201,7 +201,7 @@ struct BalloonsBlue: View {
                             
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color("blue"))
-                                .frame(width: 32.5, height: 10)
+                                .frame(width: 48.75, height: 10)
                         }
                         
                         Spacer()
