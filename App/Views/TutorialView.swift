@@ -81,7 +81,7 @@ struct BalloonsRed: View {
                         
                         HStack(spacing: 16) {
                             Text("Quality Time")
-                            Text("0/50")
+                            Text("0/80")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
@@ -117,7 +117,7 @@ struct BalloonsRed: View {
                         
                         HStack(spacing: 16) {
                             Text("Quality Time")
-                            Text("40/50")
+                            Text("70/80")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
@@ -128,7 +128,7 @@ struct BalloonsRed: View {
                             
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color("red"))
-                                .frame(width: 107, height: 10)
+                                .frame(width: 113.75, height: 10)
                         }
                         
                         Spacer()
@@ -154,7 +154,7 @@ struct BalloonsBlue: View {
                         
                         HStack(spacing: 16) {
                             Text("Social Energy")
-                            Text("35/35")
+                            Text("40/40")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
@@ -190,7 +190,7 @@ struct BalloonsBlue: View {
                         
                         HStack(spacing: 16) {
                             Text("Social Energy")
-                            Text("10/35")
+                            Text("10/40")
                         }
                         .font(Font.custom("GillSans", size: 14))
                         
@@ -201,7 +201,7 @@ struct BalloonsBlue: View {
                             
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color("blue"))
-                                .frame(width: 37, height: 10)
+                                .frame(width: 32.5, height: 10)
                         }
                         
                         Spacer()
@@ -302,7 +302,7 @@ struct BlueSkills: View {
                             .padding(.top, -8)
                         
                         HStack {
-                            Text("+5")
+                            Text("+10")
                                 .font(Font.custom("GillSans", size: 14))
                                 .multilineTextAlignment(.center)
                             

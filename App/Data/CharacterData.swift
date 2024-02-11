@@ -39,12 +39,12 @@ class CharacterDataViewModel: ObservableObject {
     @Published var otty: CharacterData
 
     init() {
-        self.hedgie = CharacterData(name: "Hedgie", lifeType: .socialEnergy, totalLife: 35, currentLife: 35, animatedProgressValue: 1)
-        self.otty = CharacterData(name: "Otty", lifeType: .qualityTime, totalLife: 50, currentLife: 0, animatedProgressValue: 0)
+        self.hedgie = CharacterData(name: "Hedgie", lifeType: .socialEnergy, totalLife: 40, currentLife: 40, animatedProgressValue: 1)
+        self.otty = CharacterData(name: "Otty", lifeType: .qualityTime, totalLife: 80, currentLife: 0, animatedProgressValue: 0)
     }
     
     func resetCharacterData() {
-        hedgie = CharacterData(name: "Hedgie", lifeType: .socialEnergy, totalLife: 35, currentLife: 35, animatedProgressValue: 1)
-        otty = CharacterData(name: "Otty", lifeType: .qualityTime, totalLife: 50, currentLife: 0, animatedProgressValue: 0)
+        hedgie = CharacterData(name: "Hedgie", lifeType: .socialEnergy, totalLife: 40, currentLife: 40, animatedProgressValue: 1)
+        otty = CharacterData(name: "Otty", lifeType: .qualityTime, totalLife: 80, currentLife: 0, animatedProgressValue: 0)
     }
 }
