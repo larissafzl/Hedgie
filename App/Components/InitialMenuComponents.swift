@@ -51,15 +51,15 @@ struct GameTitle: View {
 
 struct StartButton: View {
     var body: some View {
-        Text("Start")
-            .foregroundColor(.white)
-            .font(Font.custom("GillSans", size: 28))
-            .background(
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(Color("brown"))
-                    .frame(width: 140, height: 60)
+        RoundedRectangle(cornerRadius: 30)
+            .foregroundColor(Color("brown"))
+            .frame(width: 140, height: 60)
+            .overlay(
+                Text("Start")
+                    .foregroundColor(.white)
+                    .font(Font.custom("GillSans", size: 28))
             )
-            .padding(.bottom, 40)
+            .padding(.bottom, 18)
     }
 }
 
@@ -67,18 +67,15 @@ struct StartButton: View {
 
 struct AboutButton: View {
     var body: some View {
-        Text("About")
-            .foregroundColor(.white)
-            .font(Font.custom("GillSans", size: 20))
-            .background(
-                RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(Color("brown"))
-                    .opacity(0.8)
-                    .frame(width: 90, height: 40)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color("brown"), lineWidth: 2) // Adjust the color and lineWidth as needed
-                    )
+        RoundedRectangle(cornerRadius: 30)
+            .foregroundColor(Color("brown"))
+            .opacity(0.8)
+            .frame(width: 90, height: 40)
+            .overlay(
+                Text("About")
+                    .foregroundColor(.white)
+                    .font(Font.custom("GillSans", size: 20))
             )
     }
 }
+
