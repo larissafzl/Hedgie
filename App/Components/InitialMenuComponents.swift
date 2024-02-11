@@ -23,8 +23,13 @@ struct InitialMenuComponents: View {
             .simultaneousGesture(TapGesture().onEnded {
                 playRightInterfaceEffect()
             })
-            AboutButton()
-                .padding(.top, -20)
+            NavigationLink(destination: AboutView()) {
+                AboutButton()
+            }
+            .padding(.top, -20)
+            .simultaneousGesture(TapGesture().onEnded {
+                playRightInterfaceEffect()
+            })
         }
         .padding(.bottom)
     }

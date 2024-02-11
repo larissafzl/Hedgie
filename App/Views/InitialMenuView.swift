@@ -28,7 +28,9 @@ struct InitialMenu: View {
         .onAppear {
             characterDataViewModel.resetCharacterData()
             skillDataViewModel.resetSkillsData()
-            playGameSound(volume: 1, numberOfLoops: -1)
+            if !SoundManager.instance.currentSoundIs(.gameSoundtrack) {
+                playGameSound(volume: 1, numberOfLoops: -1)
+            }
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -41,5 +43,55 @@ struct InitialMenu: View {
                 print("Sound played successfully")
             }
         }
+    }
+}
+
+struct AboutView: View {
+    var body: some View {
+        ZStack {
+            InitialMenu(initialIndex: 0)
+            
+            ZStack {
+                BlackBackground()
+                
+                BrownRectangle()
+                    .overlay(
+                        VStack(spacing: 16) {
+                            Spacer()
+                            
+                            TutorialViewTitle(titleCalled: "about")
+                            
+                            VStack {
+                                Text("The Hedgehog's Dilemma is a light-hearted game aiming to raise awareness about social anxiety, a mental disorder that affects over 150 thousand people in Brazil and countless more globally.\n\n I hope you enjoy playing it!\n")
+                                
+                                Text("Created by").italic()
+                                Text("Larissa Fazolin")
+                            }
+                            .font(Font.custom("GillSans", size: 20))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 32)
+                            .multilineTextAlignment(.center)
+                            
+                            Spacer()
+                        }
+                    )
+                    .overlay(
+                        NavigationLink(destination: {
+                            InitialMenu(initialIndex: 0)
+                                .onAppear {
+                                    playInterfaceSound()
+                                }
+                        }, label: {
+                            TutorialArrow()
+                                .padding(.bottom)
+                        })
+                    )
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+
+    func playInterfaceSound() {
+        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
