@@ -246,13 +246,6 @@ struct FirstEndView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            playRightInterfaceEffect()
-        }
-    }
-    
-    func playRightInterfaceEffect() {
-        EffectManager.instance.playSound(sound: .rightInterfaceEffect, volume: 0.8)
     }
 }
 

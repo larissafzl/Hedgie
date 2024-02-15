@@ -40,15 +40,9 @@ struct ArrowButtonIntroView1: View {
             NavigationLink(destination: EnemysIntro(currentIndex: $currentIndex)) {
                 ArrowButtonView()
             }
-            .onAppear {
-                playRightInterfaceEffect()
-            }
         } else if currentIndex == 1 {
             NavigationLink(destination: HedgiesIntro(currentIndex: $currentIndex)) {
                 ArrowButtonView()
-            }
-            .onAppear {
-                playRightInterfaceEffect()
             }
         } else {
             ArrowButtonView()
