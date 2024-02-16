@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "The Hedgehogs Dilemma",
+    name: "The Hedgehog's Dilemma",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "The Hedgehogs Dilemma",
+            name: "The Hedgehog's Dilemma",
             targets: ["App"],
             teamIdentifier: "MR249PWTJZ",
             displayVersion: "1.0",
