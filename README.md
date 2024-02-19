@@ -14,6 +14,8 @@ One challenge I've always faced is my social anxiety. While it may not always be
 
 The game was developed for iPhone and should be played in landscape mode.
 
+For a better experience, turn on the sound.
+
 Important: The game currently experiences minor lag in the Simulator when any button or navigation link with a sound effect is pressed. This lag does not occur on the iPhone or anywhere else but the Simulator, and I have not been able to find a solution for it. Despite being a bit slower, the experience should be the same :)
 
 ## Tools
@@ -34,3 +36,7 @@ I designed all the illustrations and the interface using Figma vectors.
 - Hedgie healing sound effect: created by grizzlymittz in freesound, available at https://freesound.org/people/grizzlymittz/sounds/535239/
 - Victory sound effect: created by colorsCrimsonTears in freesound, available at https://freesound.org/people/colorsCrimsonTears/sounds/580310/
 - Defeat sound effect: created by Leszek_Szary in freesound, available at https://freesound.org/people/Leszek_Szary/sounds/171673/
+
+## App Store
+
+This game is also available on the App Store: https://apps.apple.com/br/app/the-hedgehogs-dilemma/id6478014269?l=en-GB
